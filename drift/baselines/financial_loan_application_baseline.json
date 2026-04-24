@@ -1,0 +1,119 @@
+{
+  "domain": "financial_loan_application",
+  "record_count": 100,
+  "fields": {
+    "annual_income": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 80533.1,
+      "std": 24936.998980866105,
+      "min": 22000.0,
+      "max": 137294.0,
+      "p25": 65513.0,
+      "p50": 81351.0,
+      "p75": 98676.0,
+      "sample_size": 100
+    },
+    "loan_amount": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 276450.0,
+      "std": 133528.5219030607,
+      "min": 51000.0,
+      "max": 698000.0,
+      "p25": 175000.0,
+      "p50": 254000.0,
+      "p75": 353000.0,
+      "sample_size": 100
+    },
+    "credit_score": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 692.76,
+      "std": 51.92090332438566,
+      "min": 587.0,
+      "max": 850.0,
+      "p25": 653.0,
+      "p50": 697.0,
+      "p75": 731.0,
+      "sample_size": 100
+    },
+    "existing_debt": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 15631.19,
+      "std": 10772.20237622012,
+      "min": 73.0,
+      "max": 47564.0,
+      "p25": 7660.0,
+      "p50": 13894.0,
+      "p75": 21771.0,
+      "sample_size": 100
+    },
+    "employment_length_years": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 9.79,
+      "std": 5.091674725976858,
+      "min": 0.0,
+      "max": 18.0,
+      "p25": 6.0,
+      "p50": 10.0,
+      "p75": 14.0,
+      "sample_size": 100
+    },
+    "interest_rate": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 7.8886,
+      "std": 1.9886750169980822,
+      "min": 4.62,
+      "max": 11.39,
+      "p25": 5.91,
+      "p50": 7.78,
+      "p75": 9.8,
+      "sample_size": 100
+    },
+    "employment_status": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "employed": 0.52,
+        "self_employed": 0.27,
+        "retired": 0.21
+      }
+    },
+    "loan_purpose": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "refinance": 0.17,
+        "education": 0.13,
+        "home_purchase": 0.13,
+        "debt_consolidation": 0.19,
+        "personal": 0.1,
+        "auto": 0.16,
+        "business": 0.12
+      }
+    },
+    "co_applicant": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "false": 0.85,
+        "true": 0.15
+      }
+    }
+  },
+  "null_rates": {
+    "employer_name": 0.0,
+    "employment_length_years": 0.0,
+    "interest_rate": 0.0,
+    "approval_date": 0.0,
+    "approved_amount": 0.0,
+    "property_value": 1.0,
+    "notes": 1.0
+  },
+  "violation_rate": 0.01,
+  "baseline_size": 100
+}

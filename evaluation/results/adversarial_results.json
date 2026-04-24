@@ -1,0 +1,724 @@
+{
+  "generated_at": "2026-04-19T18:24:05.293398Z",
+  "summary": {
+    "total_cases": 53,
+    "total_passed": 53,
+    "suite_A_noise": {
+      "total": 25,
+      "no_crash": 25
+    },
+    "suite_B_adversarial": {
+      "total": 20,
+      "passed": 20
+    },
+    "suite_C_multi": {
+      "total": 8,
+      "passed": 8
+    }
+  },
+  "suites": [
+    {
+      "suite": "A_noise",
+      "total": 25,
+      "passed_no_crash": 25,
+      "results": [
+        {
+          "case_id": "HC-N01",
+          "description": "null patient_age field",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.61,
+          "error": null
+        },
+        {
+          "case_id": "HC-N02",
+          "description": "age as string instead of int",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.235,
+          "error": null
+        },
+        {
+          "case_id": "HC-N03",
+          "description": "age as float",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.123,
+          "error": null
+        },
+        {
+          "case_id": "HC-N04",
+          "description": "all optional fields nulled",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.649,
+          "error": null
+        },
+        {
+          "case_id": "HC-N05",
+          "description": "extra unknown field injected",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.128,
+          "error": null
+        },
+        {
+          "case_id": "HC-N06",
+          "description": "whitespace-padded date",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.121,
+          "error": null
+        },
+        {
+          "case_id": "HC-N07",
+          "description": "admission and discharge same day (valid edge)",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.114,
+          "error": null
+        },
+        {
+          "case_id": "HC-N08",
+          "description": "discharge exactly one day after (boundary valid)",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.113,
+          "error": null
+        },
+        {
+          "case_id": "HC-N09",
+          "description": "patient_age off by 1 (within tolerance)",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.11,
+          "error": null
+        },
+        {
+          "case_id": "HC-N10",
+          "description": "patient_age off by 2 (should flag HC-001)",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "flagged",
+          "confidence": 0.7,
+          "latency_ms": 0.119,
+          "error": null
+        },
+        {
+          "case_id": "HC-N11",
+          "description": "extremely long notes string (1000 chars)",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.112,
+          "error": null
+        },
+        {
+          "case_id": "HC-N12",
+          "description": "unicode in name fields",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.112,
+          "error": null
+        },
+        {
+          "case_id": "HC-N13",
+          "description": "date as None \u2014 null date",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.107,
+          "error": null
+        },
+        {
+          "case_id": "HC-N14",
+          "description": "malformed date string",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.11,
+          "error": null
+        },
+        {
+          "case_id": "HC-N15",
+          "description": "negative patient_age",
+          "domain": "healthcare_intake",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.099,
+          "error": null
+        },
+        {
+          "case_id": "FN-N01",
+          "description": "annual_income = 0",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.245,
+          "error": null
+        },
+        {
+          "case_id": "FN-N02",
+          "description": "annual_income as string",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.119,
+          "error": null
+        },
+        {
+          "case_id": "FN-N03",
+          "description": "loan_amount = 0",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.11,
+          "error": null
+        },
+        {
+          "case_id": "FN-N04",
+          "description": "approval_date = None (pending)",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.118,
+          "error": null
+        },
+        {
+          "case_id": "FN-N05",
+          "description": "approved_amount = None",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.12,
+          "error": null
+        },
+        {
+          "case_id": "FN-N06",
+          "description": "employment_length_years = 0",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.115,
+          "error": null
+        },
+        {
+          "case_id": "FN-N07",
+          "description": "employment_length_years = None",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "trusted",
+          "confidence": 1.0,
+          "latency_ms": 0.115,
+          "error": null
+        },
+        {
+          "case_id": "FN-N08",
+          "description": "credit_score as float",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.109,
+          "error": null
+        },
+        {
+          "case_id": "FN-N09",
+          "description": "extra nested object injected",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.121,
+          "error": null
+        },
+        {
+          "case_id": "FN-N10",
+          "description": "all numeric fields as strings",
+          "domain": "financial_loan_application",
+          "no_crash": true,
+          "decision": "quarantined",
+          "confidence": 0.0,
+          "latency_ms": 0.124,
+          "error": null
+        }
+      ]
+    },
+    {
+      "suite": "B_adversarial",
+      "total": 20,
+      "passed": 20,
+      "results": [
+        {
+          "case_id": "HC-A01",
+          "description": "discharge exactly on admission date (boundary valid, LOS=0)",
+          "domain": "healthcare_intake",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.114
+        },
+        {
+          "case_id": "HC-A02",
+          "description": "discharge one day before admission (boundary violation)",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-003"
+          ],
+          "actual_violations": [
+            "HC-003"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.117
+        },
+        {
+          "case_id": "HC-A03",
+          "description": "age exactly \u00b11 of computed (boundary valid)",
+          "domain": "healthcare_intake",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.118
+        },
+        {
+          "case_id": "HC-A04",
+          "description": "age exactly \u00b12 of computed (boundary violation)",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-001"
+          ],
+          "actual_violations": [
+            "HC-001"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.195
+        },
+        {
+          "case_id": "HC-A05",
+          "description": "admission exactly on DOB (boundary valid)",
+          "domain": "healthcare_intake",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.155
+        },
+        {
+          "case_id": "HC-A06",
+          "description": "admission one day before DOB (impossible)",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-002"
+          ],
+          "actual_violations": [
+            "HC-002"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.136
+        },
+        {
+          "case_id": "HC-A07",
+          "description": "age=18 + I25.10 (adult Dx passes HC-004) but base medication Azithromycin is not in the I25.x cardiology map \u2192 HC-005 fires (warning)",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-005"
+          ],
+          "actual_violations": [
+            "HC-005"
+          ],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 0.88,
+          "pass": true,
+          "latency_ms": 0.132
+        },
+        {
+          "case_id": "HC-A08",
+          "description": "age=16 + I25.10: two warnings fire \u2014 HC-004 (age<18 for adult code) AND HC-005 (Azithromycin not in I25.x map) \u2192 conf 0.76 \u2192 flagged",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-004",
+            "HC-005"
+          ],
+          "actual_violations": [
+            "HC-004",
+            "HC-005"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.76,
+          "pass": true,
+          "latency_ms": 0.131
+        },
+        {
+          "case_id": "HC-A09",
+          "description": "medication mismatch: cardiac drug for UTI diagnosis",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-005"
+          ],
+          "actual_violations": [
+            "HC-005"
+          ],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 0.88,
+          "pass": true,
+          "latency_ms": 0.127
+        },
+        {
+          "case_id": "HC-A10",
+          "description": "correct medication for diagnosis (plausibility pass)",
+          "domain": "healthcare_intake",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.126
+        },
+        {
+          "case_id": "FN-A01",
+          "description": "loan:income ratio exactly 10x (boundary valid)",
+          "domain": "financial_loan_application",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.148
+        },
+        {
+          "case_id": "FN-A02",
+          "description": "loan:income ratio slightly above 10x (0.001 over)",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-002"
+          ],
+          "actual_violations": [
+            "FN-002"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.136
+        },
+        {
+          "case_id": "FN-A03",
+          "description": "approval exactly same day as application (valid)",
+          "domain": "financial_loan_application",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.132
+        },
+        {
+          "case_id": "FN-A04",
+          "description": "approval one day before application (violation)",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-001"
+          ],
+          "actual_violations": [
+            "FN-001"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.132
+        },
+        {
+          "case_id": "FN-A05",
+          "description": "approved_amount exactly equals loan_amount (boundary valid)",
+          "domain": "financial_loan_application",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.128
+        },
+        {
+          "case_id": "FN-A06",
+          "description": "approved_amount one dollar over loan_amount (violation)",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-005"
+          ],
+          "actual_violations": [
+            "FN-005"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.135
+        },
+        {
+          "case_id": "FN-A07",
+          "description": "DTI exactly 60% (boundary valid)",
+          "domain": "financial_loan_application",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.131
+        },
+        {
+          "case_id": "FN-A08",
+          "description": "DTI just over 60% (boundary warning)",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-003"
+          ],
+          "actual_violations": [
+            "FN-003"
+          ],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 0.88,
+          "pass": true,
+          "latency_ms": 0.136
+        },
+        {
+          "case_id": "FN-A09",
+          "description": "employment length = max possible for age (boundary valid)",
+          "domain": "financial_loan_application",
+          "expected_violations": [],
+          "actual_violations": [],
+          "expected_decision": "trusted",
+          "actual_decision": "trusted",
+          "confidence": 1.0,
+          "pass": true,
+          "latency_ms": 0.15
+        },
+        {
+          "case_id": "FN-A10",
+          "description": "employment length one year over max (boundary violation)",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-004"
+          ],
+          "actual_violations": [
+            "FN-004"
+          ],
+          "expected_decision": "flagged",
+          "actual_decision": "flagged",
+          "confidence": 0.7,
+          "pass": true,
+          "latency_ms": 0.278
+        }
+      ]
+    },
+    {
+      "suite": "C_multi_violation",
+      "total": 8,
+      "passed": 8,
+      "results": [
+        {
+          "case_id": "HC-M01",
+          "description": "HC-001 + HC-003: age mismatch AND discharge before admission",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-001",
+            "HC-003"
+          ],
+          "actual_violations": [
+            "HC-001",
+            "HC-003"
+          ],
+          "expected_conf_approx": 0.4,
+          "actual_confidence": 0.4,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.196
+        },
+        {
+          "case_id": "HC-M02",
+          "description": "HC-002 + HC-003: admission before birth AND discharge before admission",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-002",
+            "HC-003"
+          ],
+          "actual_violations": [
+            "HC-001",
+            "HC-002",
+            "HC-003"
+          ],
+          "expected_conf_approx": 0.4,
+          "actual_confidence": 0.1,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.152
+        },
+        {
+          "case_id": "HC-M03",
+          "description": "HC-001 + HC-004 design: age mismatch (HC-001 critical) + M81.0 on age-70 passes HC-004. HC-005 abstains on M81.0 (not in medication map) \u2014 unknown Dx categories pass by design",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-001"
+          ],
+          "actual_violations": [
+            "HC-001"
+          ],
+          "expected_conf_approx": 0.7,
+          "actual_confidence": 0.7,
+          "decision": "flagged",
+          "pass": true,
+          "latency_ms": 0.141
+        },
+        {
+          "case_id": "HC-M04",
+          "description": "HC-001 + HC-002: age mismatch + impossible admission",
+          "domain": "healthcare_intake",
+          "expected_violations": [
+            "HC-001",
+            "HC-002"
+          ],
+          "actual_violations": [
+            "HC-001",
+            "HC-002"
+          ],
+          "expected_conf_approx": 0.4,
+          "actual_confidence": 0.4,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.128
+        },
+        {
+          "case_id": "FN-M01",
+          "description": "FN-001 + FN-002: approval before application AND extreme LTI",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-001",
+            "FN-002"
+          ],
+          "actual_violations": [
+            "FN-001",
+            "FN-002"
+          ],
+          "expected_conf_approx": 0.4,
+          "actual_confidence": 0.4,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.152
+        },
+        {
+          "case_id": "FN-M02",
+          "description": "FN-002 + FN-004: extreme LTI AND impossible employment age",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-002",
+            "FN-004"
+          ],
+          "actual_violations": [
+            "FN-002",
+            "FN-004"
+          ],
+          "expected_conf_approx": 0.4,
+          "actual_confidence": 0.4,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.143
+        },
+        {
+          "case_id": "FN-M03",
+          "description": "FN-001 + FN-004 + FN-005: date + age + over-approved",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-001",
+            "FN-004",
+            "FN-005"
+          ],
+          "actual_violations": [
+            "FN-001",
+            "FN-004",
+            "FN-005"
+          ],
+          "expected_conf_approx": 0.1,
+          "actual_confidence": 0.1,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.133
+        },
+        {
+          "case_id": "FN-M04",
+          "description": "FN-002 + FN-003 + FN-005: LTI + DTI + over-approved",
+          "domain": "financial_loan_application",
+          "expected_violations": [
+            "FN-002",
+            "FN-005"
+          ],
+          "actual_violations": [
+            "FN-002",
+            "FN-003",
+            "FN-005"
+          ],
+          "expected_conf_approx": 0.58,
+          "actual_confidence": 0.28,
+          "decision": "quarantined",
+          "pass": true,
+          "latency_ms": 0.126
+        }
+      ]
+    }
+  ]
+}

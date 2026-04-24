@@ -1,0 +1,48 @@
+# ============================================================
+# SchemaGuard — Python Dependencies
+# ============================================================
+# Install: pip install -r requirements.txt
+# Tested with Python 3.12
+
+# ── API & Web ─────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.0.0
+python-multipart>=0.0.9        # required for FastAPI file uploads
+
+# ── LLM Providers ────────────────────────────────────────
+anthropic>=0.26.0
+openai>=1.0.0                  # optional; used in legacy data_gen
+
+# ── Environment & Config ─────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── Schema & Validation ──────────────────────────────────
+jsonschema>=4.17.0
+
+# ── RAG / Vector Store ───────────────────────────────────
+faiss-cpu>=1.7.4
+sentence-transformers>=2.7.0
+
+# ── PDF Extraction (document ingest) ─────────────────────
+pdfplumber>=0.10.0
+pypdf>=4.0.0                   # fallback if pdfplumber unavailable
+
+# ── Data Processing ───────────────────────────────────────
+pandas>=2.0.0
+numpy>=1.26.0
+
+# ── Visualisation ─────────────────────────────────────────
+matplotlib>=3.8.0
+plotly>=5.18.0
+
+# ── UI (Streamlit demo) ───────────────────────────────────
+streamlit>=1.32.0
+
+# ── Testing ───────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# ── Notebooks ────────────────────────────────────────────
+ipykernel>=6.29.0              # for running .ipynb
+nbformat>=5.9.0

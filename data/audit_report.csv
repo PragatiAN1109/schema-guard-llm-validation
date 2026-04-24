@@ -1,0 +1,3 @@
+domain,total,valid,invalid,edge_case,structural_invalid,label_mismatch,unexpected_violation,clean
+healthcare_intake,300,0,0,0,300,0,0,0
+financial_loan_application,300,0,0,0,300,0,0,0

@@ -1,0 +1,112 @@
+[
+  {
+    "label": "Clean — standard adult patient",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-3021", "first_name": "James", "last_name": "Carter",
+      "date_of_birth": "1978-11-02", "gender": "male",
+      "admission_date": "2024-09-14", "discharge_date": "2024-09-19",
+      "diagnosis_code": "J18.9", "diagnosis_description": "Pneumonia, unspecified organism",
+      "treating_physician": "Dr. Susan Park", "medication": "Azithromycin",
+      "procedure_code": null, "insurance_provider": "Aetna",
+      "patient_age": 45, "emergency_admission": false, "notes": null
+    }
+  },
+  {
+    "label": "Clean — home purchase loan",
+    "domain": "financial_loan_application",
+    "record": {
+      "application_id": "LA-40821", "applicant_name": "Michael Torres",
+      "date_of_birth": "1988-05-22", "annual_income": 92000,
+      "employment_status": "employed", "employer_name": "Deloitte",
+      "employment_length_years": 6, "loan_amount": 320000,
+      "loan_purpose": "home_purchase", "loan_term_months": 360,
+      "interest_rate": 6.75, "credit_score": 742, "existing_debt": 18000,
+      "application_date": "2024-08-10", "approval_date": "2024-08-24",
+      "approved_amount": 310000, "property_value": 415000,
+      "co_applicant": false, "notes": null
+    }
+  },
+  {
+    "label": "Noisy — discharge before admission (HC-003)",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-4412", "first_name": "Sarah", "last_name": "Mitchell",
+      "date_of_birth": "1990-01-20", "gender": "female",
+      "admission_date": "2024-08-15", "discharge_date": "2024-08-08",
+      "diagnosis_code": "N39.0", "diagnosis_description": "Urinary tract infection",
+      "treating_physician": "Dr. Mark Evans", "medication": "Ciprofloxacin",
+      "procedure_code": null, "insurance_provider": "UnitedHealth",
+      "patient_age": 34, "emergency_admission": false, "notes": null
+    }
+  },
+  {
+    "label": "Noisy — loan 52x income (FN-002)",
+    "domain": "financial_loan_application",
+    "record": {
+      "application_id": "LA-33190", "applicant_name": "Jessica Williams",
+      "date_of_birth": "1991-06-18", "annual_income": 48000,
+      "employment_status": "employed", "employer_name": "Target",
+      "employment_length_years": 3, "loan_amount": 2500000,
+      "loan_purpose": "home_purchase", "loan_term_months": 360,
+      "interest_rate": 6.5, "credit_score": 680, "existing_debt": 15000,
+      "application_date": "2024-05-12", "approval_date": null,
+      "approved_amount": null, "property_value": 2600000,
+      "co_applicant": false, "notes": null
+    }
+  },
+  {
+    "label": "Noisy — age mismatch (HC-001)",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-7203", "first_name": "David", "last_name": "Kim",
+      "date_of_birth": "1990-04-10", "gender": "male",
+      "admission_date": "2024-11-03", "discharge_date": "2024-11-06",
+      "diagnosis_code": "K21.0", "diagnosis_description": "GERD with esophagitis",
+      "treating_physician": "Dr. Angela Ruiz", "medication": "Omeprazole",
+      "procedure_code": null, "insurance_provider": "Cigna",
+      "patient_age": 52, "emergency_admission": false, "notes": null
+    }
+  },
+  {
+    "label": "Edge — newborn, age 0",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-9901", "first_name": "Baby", "last_name": "Garcia",
+      "date_of_birth": "2024-10-15", "gender": "female",
+      "admission_date": "2024-10-15", "discharge_date": "2024-10-18",
+      "diagnosis_code": "P59.9", "diagnosis_description": "Neonatal jaundice",
+      "treating_physician": "Dr. Nina Patel", "medication": null,
+      "procedure_code": null, "insurance_provider": "Medicaid",
+      "patient_age": 0, "emergency_admission": false, "notes": null
+    }
+  },
+  {
+    "label": "Edge — 18-year-old student, zero income",
+    "domain": "financial_loan_application",
+    "record": {
+      "application_id": "LA-10044", "applicant_name": "Noah Park",
+      "date_of_birth": "2006-09-15", "annual_income": 0,
+      "employment_status": "student", "employer_name": null,
+      "employment_length_years": null, "loan_amount": 12000,
+      "loan_purpose": "education", "loan_term_months": 120,
+      "interest_rate": 5.5, "credit_score": 300, "existing_debt": 0,
+      "application_date": "2024-10-01", "approval_date": null,
+      "approved_amount": null, "property_value": null,
+      "co_applicant": true, "notes": null
+    }
+  },
+  {
+    "label": "Edge — same-day admission and discharge",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-6650", "first_name": "Carlos", "last_name": "Rivera",
+      "date_of_birth": "1985-07-30", "gender": "male",
+      "admission_date": "2024-09-22", "discharge_date": "2024-09-22",
+      "diagnosis_code": "R10.9", "diagnosis_description": "Unspecified abdominal pain",
+      "treating_physician": "Dr. Rachel Kim", "medication": null,
+      "procedure_code": null, "insurance_provider": "Aetna",
+      "patient_age": 39, "emergency_admission": true, "notes": null
+    }
+  }
+]

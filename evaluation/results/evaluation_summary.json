@@ -1,0 +1,51 @@
+{
+  "total_records": 16,
+  "total_correct": 16,
+  "accuracy": 1.0,
+  "metrics_by_domain": {
+    "healthcare_intake": {
+      "total_records": 8,
+      "true_positives": 3,
+      "false_positives": 0,
+      "true_negatives": 5,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_quarantine_rate": 0.0,
+      "mean_confidence_valid": 1.0,
+      "mean_confidence_invalid": 0.76,
+      "accuracy": 1.0
+    },
+    "financial_loan_application": {
+      "total_records": 8,
+      "true_positives": 3,
+      "false_positives": 0,
+      "true_negatives": 5,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_quarantine_rate": 0.0,
+      "mean_confidence_valid": 1.0,
+      "mean_confidence_invalid": 0.7,
+      "accuracy": 1.0
+    }
+  },
+  "drift_evaluation": {
+    "healthcare_intake": {
+      "baseline_records": 3,
+      "baseline_fields": 5,
+      "clean_drift_detected": true,
+      "clean_alerts": 1,
+      "shifted_drift_detected": true
+    },
+    "financial_loan_application": {
+      "baseline_records": 3,
+      "baseline_fields": 9,
+      "clean_drift_detected": true,
+      "clean_alerts": 1,
+      "shifted_drift_detected": true
+    }
+  }
+}

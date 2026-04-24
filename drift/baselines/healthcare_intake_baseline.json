@@ -1,0 +1,73 @@
+{
+  "domain": "healthcare_intake",
+  "record_count": 100,
+  "fields": {
+    "patient_age": {
+      "type": "numeric",
+      "count": 100,
+      "mean": 45.09,
+      "std": 15.134477997024682,
+      "min": 5.0,
+      "max": 74.0,
+      "p25": 35.0,
+      "p50": 46.0,
+      "p75": 56.0,
+      "sample_size": 100
+    },
+    "gender": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "male": 0.41,
+        "female": 0.59
+      }
+    },
+    "diagnosis_code": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "n39.0": 0.12,
+        "j45.9": 0.11,
+        "e11.9": 0.12,
+        "k21.0": 0.18,
+        "i10": 0.08,
+        "f32.1": 0.09,
+        "i25.10": 0.08,
+        "j06.9": 0.08,
+        "m54.5": 0.1,
+        "j18.9": 0.04
+      }
+    },
+    "insurance_provider": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "humana": 0.12,
+        "cigna": 0.1,
+        "medicare": 0.11,
+        "bluecross": 0.18,
+        "medicaid": 0.14,
+        "aetna": 0.13,
+        "kaiser": 0.09,
+        "unitedhealth": 0.13
+      }
+    },
+    "emergency_admission": {
+      "type": "categorical",
+      "count": 100,
+      "distribution": {
+        "false": 0.86,
+        "true": 0.14
+      }
+    }
+  },
+  "null_rates": {
+    "discharge_date": 0.0,
+    "medication": 0.0,
+    "procedure_code": 1.0,
+    "insurance_provider": 0.0,
+    "notes": 1.0
+  },
+  "violation_rate": 0.09,
+  "baseline_size": 100
+}

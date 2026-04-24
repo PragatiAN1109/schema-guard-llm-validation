@@ -1,0 +1,103 @@
+{
+  "generated_at": "2026-04-19T00:31:01.499401+00:00",
+  "data_sources": {
+    "audit_log_records": 140,
+    "eval_seed_records": 16
+  },
+  "classification_metrics": {
+    "healthcare_intake": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "accuracy": 1.0,
+      "false_quarantine_rate": 0.0,
+      "true_positives": 3,
+      "false_positives": 0,
+      "true_negatives": 5,
+      "false_negatives": 0
+    },
+    "financial_loan_application": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "accuracy": 1.0,
+      "false_quarantine_rate": 0.0,
+      "true_positives": 3,
+      "false_positives": 0,
+      "true_negatives": 5,
+      "false_negatives": 0
+    }
+  },
+  "confidence_metrics": {
+    "healthcare_intake": {
+      "mean_valid": 1.0,
+      "mean_invalid": 0.76,
+      "gap": 0.24
+    },
+    "financial_loan_application": {
+      "mean_valid": 1.0,
+      "mean_invalid": 0.7,
+      "gap": 0.3
+    },
+    "audit_log_all_domains": {
+      "mean": 0.8903,
+      "std": 0.1429,
+      "min": 0.7,
+      "max": 1.0,
+      "trusted_count": 90,
+      "flagged_count": 50,
+      "quarantined_count": 0
+    }
+  },
+  "rule_violation_counts": {
+    "healthcare_intake": {
+      "HC-003": 37,
+      "HC-001": 3,
+      "HC-004": 3
+    },
+    "financial_loan_application": {
+      "FN-001": 6,
+      "FN-002": 2,
+      "FN-004": 2
+    },
+    "total_violations": 53
+  },
+  "decision_distribution": {
+    "healthcare_intake": {
+      "trusted": 83,
+      "flagged": 40
+    },
+    "financial_loan_application": {
+      "trusted": 7,
+      "flagged": 10
+    }
+  },
+  "latency_ms": {
+    "n_records": 140,
+    "mean": 0.2606,
+    "std": 0.7411,
+    "p50": 0.09,
+    "p90": 0.339,
+    "p95": 1.1605,
+    "p99": 3.0188,
+    "max": 7.42
+  },
+  "drift_baselines_available": [
+    "healthcare_intake",
+    "financial_loan_application"
+  ],
+  "plots_generated": [
+    "01_classification_metrics.png",
+    "02_confusion_matrices.png",
+    "03_confidence_histogram.png",
+    "04_confidence_by_category.png",
+    "05_rule_violation_frequency.png",
+    "06_decision_distribution.png",
+    "07_latency_distribution.png",
+    "08_decisions_over_time.png",
+    "09_drift_signals.png",
+    "10_confidence_gap.png",
+    "11_pipeline_throughput.png",
+    "12_summary_dashboard.png"
+  ]
+}

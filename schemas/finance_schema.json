@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FinancialLoanApplication",
+  "description": "Schema for financial loan application records",
+  "type": "object",
+  "required": [
+    "application_id",
+    "applicant_name",
+    "date_of_birth",
+    "annual_income",
+    "employment_status",
+    "employer_name",
+    "loan_amount",
+    "loan_purpose",
+    "application_date"
+  ],
+  "properties": {
+    "application_id": {
+      "type": "string",
+      "pattern": "^LA-[0-9]{5,8}$",
+      "description": "Unique application identifier (format: LA-XXXXX)"
+    },
+    "applicant_name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 200
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date"
+    },
+    "annual_income": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Annual gross income in USD"
+    },
+    "employment_status": {
+      "type": "string",
+      "enum": ["employed", "self_employed", "unemployed", "retired", "student"]
+    },
+    "employer_name": {
+      "type": ["string", "null"],
+      "description": "Required if employed or self_employed"
+    },
+    "employment_length_years": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 60,
+      "description": "Years at current employer"
+    },
+    "loan_amount": {
+      "type": "number",
+      "minimum": 100,
+      "maximum": 10000000,
+      "description": "Requested loan amount in USD"
+    },
+    "loan_purpose": {
+      "type": "string",
+      "enum": ["home_purchase", "refinance", "auto", "education", "personal", "business", "debt_consolidation"]
+    },
+    "loan_term_months": {
+      "type": "integer",
+      "enum": [12, 24, 36, 48, 60, 84, 120, 180, 240, 360],
+      "description": "Loan term in months"
+    },
+    "interest_rate": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 30.0,
+      "description": "Annual interest rate percentage"
+    },
+    "credit_score": {
+      "type": "integer",
+      "minimum": 300,
+      "maximum": 850
+    },
+    "existing_debt": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total existing debt in USD"
+    },
+    "application_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "approval_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Null if not yet approved"
+    },
+    "approved_amount": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Approved loan amount, if different from requested"
+    },
+    "property_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Property value for home/refinance loans"
+    },
+    "co_applicant": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "maxLength": 2000
+    }
+  },
+  "additionalProperties": false
+}

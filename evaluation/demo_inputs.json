@@ -1,0 +1,98 @@
+[
+  {
+    "label": "Valid Healthcare Record",
+    "domain": "healthcare_intake",
+    "record": {
+      "patient_id": "P-3021",
+      "first_name": "James",
+      "last_name": "Carter",
+      "date_of_birth": "1978-11-02",
+      "gender": "male",
+      "admission_date": "2024-09-14",
+      "discharge_date": "2024-09-19",
+      "diagnosis_code": "J18.9",
+      "diagnosis_description": "Pneumonia, unspecified organism",
+      "treating_physician": "Dr. Susan Park",
+      "medication": "Azithromycin",
+      "procedure_code": null,
+      "insurance_provider": "Aetna",
+      "patient_age": 45,
+      "emergency_admission": false,
+      "notes": "Admitted for community-acquired pneumonia."
+    }
+  },
+  {
+    "label": "Invalid Healthcare Record — Discharge Before Admission",
+    "domain": "healthcare_intake",
+    "expected_violation": "HC-003",
+    "record": {
+      "patient_id": "P-4412",
+      "first_name": "Sarah",
+      "last_name": "Mitchell",
+      "date_of_birth": "1990-01-20",
+      "gender": "female",
+      "admission_date": "2024-08-15",
+      "discharge_date": "2024-08-08",
+      "diagnosis_code": "N39.0",
+      "diagnosis_description": "Urinary tract infection, site not specified",
+      "treating_physician": "Dr. Mark Evans",
+      "medication": "Ciprofloxacin",
+      "procedure_code": null,
+      "insurance_provider": "UnitedHealth",
+      "patient_age": 34,
+      "emergency_admission": false,
+      "notes": "Treated for recurrent UTI."
+    }
+  },
+  {
+    "label": "Valid Finance Record",
+    "domain": "financial_loan_application",
+    "record": {
+      "application_id": "LA-40821",
+      "applicant_name": "Michael Torres",
+      "date_of_birth": "1988-05-22",
+      "annual_income": 92000,
+      "employment_status": "employed",
+      "employer_name": "Deloitte",
+      "employment_length_years": 6,
+      "loan_amount": 320000,
+      "loan_purpose": "home_purchase",
+      "loan_term_months": 360,
+      "interest_rate": 6.75,
+      "credit_score": 742,
+      "existing_debt": 18000,
+      "application_date": "2024-08-10",
+      "approval_date": "2024-08-24",
+      "approved_amount": 310000,
+      "property_value": 415000,
+      "co_applicant": false,
+      "notes": null
+    }
+  },
+  {
+    "label": "Invalid Finance Record — Loan 52x Income",
+    "domain": "financial_loan_application",
+    "expected_violation": "FN-002",
+    "record": {
+      "application_id": "LA-33190",
+      "applicant_name": "Jessica Williams",
+      "date_of_birth": "1991-06-18",
+      "annual_income": 48000,
+      "employment_status": "employed",
+      "employer_name": "Target",
+      "employment_length_years": 3,
+      "loan_amount": 2500000,
+      "loan_purpose": "home_purchase",
+      "loan_term_months": 360,
+      "interest_rate": 6.5,
+      "credit_score": 680,
+      "existing_debt": 15000,
+      "application_date": "2024-05-12",
+      "approval_date": null,
+      "approved_amount": null,
+      "property_value": 2600000,
+      "co_applicant": false,
+      "notes": null
+    }
+  }
+]

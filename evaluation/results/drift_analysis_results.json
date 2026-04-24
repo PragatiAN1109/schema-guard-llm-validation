@@ -1,0 +1,698 @@
+{
+  "healthcare_intake": {
+    "shifts": {
+      "age_shift": {
+        "description": "Age distribution shift: mean patient age +26 years (older cohort)",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 1,
+        "alerts": [
+          {
+            "field": "patient_age",
+            "type": "numeric_shift",
+            "message": "patient_age: mean shifted by 1.66 std devs (45.1 \u2192 70.2)",
+            "severity": "medium"
+          }
+        ],
+        "metrics": {
+          "patient_age": {
+            "type": "numeric",
+            "baseline_mean": 45.09,
+            "current_mean": 70.15,
+            "baseline_std": 15.13,
+            "current_std": 16.93,
+            "z_shift": 1.6558,
+            "std_ratio": 1.1184,
+            "alert": true
+          },
+          "gender": {
+            "type": "categorical",
+            "psi": 0.0404,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          },
+          "diagnosis_code": {
+            "type": "categorical",
+            "psi": 0.2345,
+            "effective_threshold": 0.4,
+            "baseline_categories": 10,
+            "current_categories": 10,
+            "alert": false
+          },
+          "insurance_provider": {
+            "type": "categorical",
+            "psi": 0.1223,
+            "effective_threshold": 0.32,
+            "baseline_categories": 8,
+            "current_categories": 8,
+            "alert": false
+          },
+          "emergency_admission": {
+            "type": "categorical",
+            "psi": 0.0031,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          }
+        },
+        "latency_ms": 0.15
+      },
+      "diagnosis_shift": {
+        "description": "Diagnosis mix shift: 70% records shifted to chronic conditions",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 1,
+        "alerts": [
+          {
+            "field": "diagnosis_code",
+            "type": "categorical_shift",
+            "message": "diagnosis_code: PSI = 0.8846 (effective_threshold: 0.4000)",
+            "severity": "high"
+          }
+        ],
+        "metrics": {
+          "patient_age": {
+            "type": "numeric",
+            "baseline_mean": 45.09,
+            "current_mean": 44.95,
+            "baseline_std": 15.13,
+            "current_std": 17.21,
+            "z_shift": 0.0093,
+            "std_ratio": 1.137,
+            "alert": false
+          },
+          "gender": {
+            "type": "categorical",
+            "psi": 0.0404,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          },
+          "diagnosis_code": {
+            "type": "categorical",
+            "psi": 0.8846,
+            "effective_threshold": 0.4,
+            "baseline_categories": 10,
+            "current_categories": 10,
+            "alert": true
+          },
+          "insurance_provider": {
+            "type": "categorical",
+            "psi": 0.1223,
+            "effective_threshold": 0.32,
+            "baseline_categories": 8,
+            "current_categories": 8,
+            "alert": false
+          },
+          "emergency_admission": {
+            "type": "categorical",
+            "psi": 0.0031,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          }
+        },
+        "latency_ms": 0.13
+      },
+      "missing_data_surge": {
+        "description": "Missing data surge: key fields spiking to ~40% null rate",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 2,
+        "alerts": [
+          {
+            "field": "medication",
+            "type": "null_rate_shift",
+            "message": "medication: null rate changed from 0% to 45%",
+            "severity": "low"
+          },
+          {
+            "field": "insurance_provider",
+            "type": "null_rate_shift",
+            "message": "insurance_provider: null rate changed from 0% to 44%",
+            "severity": "low"
+          }
+        ],
+        "metrics": {
+          "patient_age": {
+            "type": "numeric",
+            "baseline_mean": 45.09,
+            "current_mean": 44.95,
+            "baseline_std": 15.13,
+            "current_std": 17.21,
+            "z_shift": 0.0093,
+            "std_ratio": 1.137,
+            "alert": false
+          },
+          "gender": {
+            "type": "categorical",
+            "psi": 0.0404,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          },
+          "diagnosis_code": {
+            "type": "categorical",
+            "psi": 0.2345,
+            "effective_threshold": 0.4,
+            "baseline_categories": 10,
+            "current_categories": 10,
+            "alert": false
+          },
+          "insurance_provider": {
+            "type": "categorical",
+            "psi": 0.1147,
+            "effective_threshold": 0.32,
+            "baseline_categories": 8,
+            "current_categories": 8,
+            "alert": false
+          },
+          "emergency_admission": {
+            "type": "categorical",
+            "psi": 0.0031,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          },
+          "medication_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.45,
+            "delta": 0.45,
+            "alert": true
+          },
+          "insurance_provider_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.44,
+            "delta": 0.44,
+            "alert": true
+          }
+        },
+        "latency_ms": 0.12
+      }
+    },
+    "stable": {
+      "n_records": 100,
+      "drift_detected": false,
+      "n_alerts": 0,
+      "alerts": [],
+      "metrics": {
+        "patient_age": {
+          "type": "numeric",
+          "baseline_mean": 45.09,
+          "current_mean": 46.76,
+          "baseline_std": 15.13,
+          "current_std": 14.68,
+          "z_shift": 0.1103,
+          "std_ratio": 0.9697,
+          "alert": false
+        },
+        "gender": {
+          "type": "categorical",
+          "psi": 0.0328,
+          "effective_threshold": 0.2,
+          "baseline_categories": 2,
+          "current_categories": 2,
+          "alert": false
+        },
+        "diagnosis_code": {
+          "type": "categorical",
+          "psi": 0.2637,
+          "effective_threshold": 0.4,
+          "baseline_categories": 10,
+          "current_categories": 10,
+          "alert": false
+        },
+        "insurance_provider": {
+          "type": "categorical",
+          "psi": 0.2727,
+          "effective_threshold": 0.32,
+          "baseline_categories": 8,
+          "current_categories": 8,
+          "alert": false
+        },
+        "emergency_admission": {
+          "type": "categorical",
+          "psi": 0.0249,
+          "effective_threshold": 0.2,
+          "baseline_categories": 2,
+          "current_categories": 2,
+          "alert": false
+        }
+      }
+    }
+  },
+  "financial_loan_application": {
+    "shifts": {
+      "income_shift": {
+        "description": "Income shift: mean annual income drops ~55% (lower-income applicants)",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 1,
+        "alerts": [
+          {
+            "field": "annual_income",
+            "type": "numeric_shift",
+            "message": "annual_income: mean shifted by 1.91 std devs (80533.1 \u2192 32891.8)",
+            "severity": "medium"
+          }
+        ],
+        "metrics": {
+          "annual_income": {
+            "type": "numeric",
+            "baseline_mean": 80533.1,
+            "current_mean": 32891.84,
+            "baseline_std": 24937.0,
+            "current_std": 11308.03,
+            "z_shift": 1.9105,
+            "std_ratio": 0.4535,
+            "alert": true
+          },
+          "loan_amount": {
+            "type": "numeric",
+            "baseline_mean": 276450.0,
+            "current_mean": 277020.0,
+            "baseline_std": 133528.52,
+            "current_std": 117251.78,
+            "z_shift": 0.0043,
+            "std_ratio": 0.8781,
+            "alert": false
+          },
+          "credit_score": {
+            "type": "numeric",
+            "baseline_mean": 692.76,
+            "current_mean": 706.79,
+            "baseline_std": 51.92,
+            "current_std": 55.42,
+            "z_shift": 0.2702,
+            "std_ratio": 1.0673,
+            "alert": false
+          },
+          "existing_debt": {
+            "type": "numeric",
+            "baseline_mean": 15631.19,
+            "current_mean": 16020.17,
+            "baseline_std": 10772.2,
+            "current_std": 10982.94,
+            "z_shift": 0.0361,
+            "std_ratio": 1.0196,
+            "alert": false
+          },
+          "employment_length_years": {
+            "type": "numeric",
+            "baseline_mean": 9.79,
+            "current_mean": 8.69,
+            "baseline_std": 5.09,
+            "current_std": 5.19,
+            "z_shift": 0.216,
+            "std_ratio": 1.0191,
+            "alert": false
+          },
+          "interest_rate": {
+            "type": "numeric",
+            "baseline_mean": 7.89,
+            "current_mean": 7.72,
+            "baseline_std": 1.99,
+            "current_std": 1.93,
+            "z_shift": 0.083,
+            "std_ratio": 0.9709,
+            "alert": false
+          },
+          "employment_status": {
+            "type": "categorical",
+            "psi": 0.0559,
+            "effective_threshold": 0.2,
+            "baseline_categories": 3,
+            "current_categories": 3,
+            "alert": false
+          },
+          "loan_purpose": {
+            "type": "categorical",
+            "psi": 0.1133,
+            "effective_threshold": 0.28,
+            "baseline_categories": 7,
+            "current_categories": 7,
+            "alert": false
+          },
+          "co_applicant": {
+            "type": "categorical",
+            "psi": 0.0524,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          }
+        },
+        "latency_ms": 0.22
+      },
+      "score_shift": {
+        "description": "Credit score degradation: mean score drops ~130 points",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 1,
+        "alerts": [
+          {
+            "field": "credit_score",
+            "type": "numeric_shift",
+            "message": "credit_score: mean shifted by 2.22 std devs (692.8 \u2192 577.6)",
+            "severity": "medium"
+          }
+        ],
+        "metrics": {
+          "annual_income": {
+            "type": "numeric",
+            "baseline_mean": 80533.1,
+            "current_mean": 82568.65,
+            "baseline_std": 24937.0,
+            "current_std": 24612.44,
+            "z_shift": 0.0816,
+            "std_ratio": 0.987,
+            "alert": false
+          },
+          "loan_amount": {
+            "type": "numeric",
+            "baseline_mean": 276450.0,
+            "current_mean": 277020.0,
+            "baseline_std": 133528.52,
+            "current_std": 117251.78,
+            "z_shift": 0.0043,
+            "std_ratio": 0.8781,
+            "alert": false
+          },
+          "credit_score": {
+            "type": "numeric",
+            "baseline_mean": 692.76,
+            "current_mean": 577.62,
+            "baseline_std": 51.92,
+            "current_std": 58.85,
+            "z_shift": 2.2176,
+            "std_ratio": 1.1335,
+            "alert": true
+          },
+          "existing_debt": {
+            "type": "numeric",
+            "baseline_mean": 15631.19,
+            "current_mean": 16020.17,
+            "baseline_std": 10772.2,
+            "current_std": 10982.94,
+            "z_shift": 0.0361,
+            "std_ratio": 1.0196,
+            "alert": false
+          },
+          "employment_length_years": {
+            "type": "numeric",
+            "baseline_mean": 9.79,
+            "current_mean": 8.69,
+            "baseline_std": 5.09,
+            "current_std": 5.19,
+            "z_shift": 0.216,
+            "std_ratio": 1.0191,
+            "alert": false
+          },
+          "interest_rate": {
+            "type": "numeric",
+            "baseline_mean": 7.89,
+            "current_mean": 7.72,
+            "baseline_std": 1.99,
+            "current_std": 1.93,
+            "z_shift": 0.083,
+            "std_ratio": 0.9709,
+            "alert": false
+          },
+          "employment_status": {
+            "type": "categorical",
+            "psi": 0.0559,
+            "effective_threshold": 0.2,
+            "baseline_categories": 3,
+            "current_categories": 3,
+            "alert": false
+          },
+          "loan_purpose": {
+            "type": "categorical",
+            "psi": 0.1133,
+            "effective_threshold": 0.28,
+            "baseline_categories": 7,
+            "current_categories": 7,
+            "alert": false
+          },
+          "co_applicant": {
+            "type": "categorical",
+            "psi": 0.0524,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          }
+        },
+        "latency_ms": 0.21
+      },
+      "missing_data_surge": {
+        "description": "Missing data surge: key fields spiking to ~35% null rate",
+        "n_records": 100,
+        "drift_detected": true,
+        "n_alerts": 4,
+        "alerts": [
+          {
+            "field": "employer_name",
+            "type": "null_rate_shift",
+            "message": "employer_name: null rate changed from 0% to 37%",
+            "severity": "low"
+          },
+          {
+            "field": "employment_length_years",
+            "type": "null_rate_shift",
+            "message": "employment_length_years: null rate changed from 0% to 37%",
+            "severity": "low"
+          },
+          {
+            "field": "approval_date",
+            "type": "null_rate_shift",
+            "message": "approval_date: null rate changed from 0% to 41%",
+            "severity": "low"
+          },
+          {
+            "field": "approved_amount",
+            "type": "null_rate_shift",
+            "message": "approved_amount: null rate changed from 0% to 39%",
+            "severity": "low"
+          }
+        ],
+        "metrics": {
+          "annual_income": {
+            "type": "numeric",
+            "baseline_mean": 80533.1,
+            "current_mean": 82568.65,
+            "baseline_std": 24937.0,
+            "current_std": 24612.44,
+            "z_shift": 0.0816,
+            "std_ratio": 0.987,
+            "alert": false
+          },
+          "loan_amount": {
+            "type": "numeric",
+            "baseline_mean": 276450.0,
+            "current_mean": 277020.0,
+            "baseline_std": 133528.52,
+            "current_std": 117251.78,
+            "z_shift": 0.0043,
+            "std_ratio": 0.8781,
+            "alert": false
+          },
+          "credit_score": {
+            "type": "numeric",
+            "baseline_mean": 692.76,
+            "current_mean": 706.79,
+            "baseline_std": 51.92,
+            "current_std": 55.42,
+            "z_shift": 0.2702,
+            "std_ratio": 1.0673,
+            "alert": false
+          },
+          "existing_debt": {
+            "type": "numeric",
+            "baseline_mean": 15631.19,
+            "current_mean": 16020.17,
+            "baseline_std": 10772.2,
+            "current_std": 10982.94,
+            "z_shift": 0.0361,
+            "std_ratio": 1.0196,
+            "alert": false
+          },
+          "employment_length_years": {
+            "type": "numeric",
+            "baseline_mean": 9.79,
+            "current_mean": 9.4,
+            "baseline_std": 5.09,
+            "current_std": 5.27,
+            "z_shift": 0.0772,
+            "std_ratio": 1.0342,
+            "alert": false
+          },
+          "interest_rate": {
+            "type": "numeric",
+            "baseline_mean": 7.89,
+            "current_mean": 7.72,
+            "baseline_std": 1.99,
+            "current_std": 1.93,
+            "z_shift": 0.083,
+            "std_ratio": 0.9709,
+            "alert": false
+          },
+          "employment_status": {
+            "type": "categorical",
+            "psi": 0.0559,
+            "effective_threshold": 0.2,
+            "baseline_categories": 3,
+            "current_categories": 3,
+            "alert": false
+          },
+          "loan_purpose": {
+            "type": "categorical",
+            "psi": 0.1133,
+            "effective_threshold": 0.28,
+            "baseline_categories": 7,
+            "current_categories": 7,
+            "alert": false
+          },
+          "co_applicant": {
+            "type": "categorical",
+            "psi": 0.0524,
+            "effective_threshold": 0.2,
+            "baseline_categories": 2,
+            "current_categories": 2,
+            "alert": false
+          },
+          "employer_name_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.37,
+            "delta": 0.37,
+            "alert": true
+          },
+          "employment_length_years_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.37,
+            "delta": 0.37,
+            "alert": true
+          },
+          "approval_date_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.41,
+            "delta": 0.41,
+            "alert": true
+          },
+          "approved_amount_null_rate": {
+            "type": "null_rate",
+            "baseline_null_rate": 0.0,
+            "current_null_rate": 0.39,
+            "delta": 0.39,
+            "alert": true
+          }
+        },
+        "latency_ms": 0.22
+      }
+    },
+    "stable": {
+      "n_records": 100,
+      "drift_detected": false,
+      "n_alerts": 0,
+      "alerts": [],
+      "metrics": {
+        "annual_income": {
+          "type": "numeric",
+          "baseline_mean": 80533.1,
+          "current_mean": 78286.15,
+          "baseline_std": 24937.0,
+          "current_std": 24551.54,
+          "z_shift": 0.0901,
+          "std_ratio": 0.9845,
+          "alert": false
+        },
+        "loan_amount": {
+          "type": "numeric",
+          "baseline_mean": 276450.0,
+          "current_mean": 267830.0,
+          "baseline_std": 133528.52,
+          "current_std": 130288.57,
+          "z_shift": 0.0646,
+          "std_ratio": 0.9757,
+          "alert": false
+        },
+        "credit_score": {
+          "type": "numeric",
+          "baseline_mean": 692.76,
+          "current_mean": 698.85,
+          "baseline_std": 51.92,
+          "current_std": 55.61,
+          "z_shift": 0.1173,
+          "std_ratio": 1.0711,
+          "alert": false
+        },
+        "existing_debt": {
+          "type": "numeric",
+          "baseline_mean": 15631.19,
+          "current_mean": 13666.54,
+          "baseline_std": 10772.2,
+          "current_std": 10163.5,
+          "z_shift": 0.1824,
+          "std_ratio": 0.9435,
+          "alert": false
+        },
+        "employment_length_years": {
+          "type": "numeric",
+          "baseline_mean": 9.79,
+          "current_mean": 8.43,
+          "baseline_std": 5.09,
+          "current_std": 5.04,
+          "z_shift": 0.2671,
+          "std_ratio": 0.989,
+          "alert": false
+        },
+        "interest_rate": {
+          "type": "numeric",
+          "baseline_mean": 7.89,
+          "current_mean": 8.06,
+          "baseline_std": 1.99,
+          "current_std": 2.06,
+          "z_shift": 0.0875,
+          "std_ratio": 1.038,
+          "alert": false
+        },
+        "employment_status": {
+          "type": "categorical",
+          "psi": 0.0175,
+          "effective_threshold": 0.2,
+          "baseline_categories": 3,
+          "current_categories": 3,
+          "alert": false
+        },
+        "loan_purpose": {
+          "type": "categorical",
+          "psi": 0.0934,
+          "effective_threshold": 0.28,
+          "baseline_categories": 7,
+          "current_categories": 7,
+          "alert": false
+        },
+        "co_applicant": {
+          "type": "categorical",
+          "psi": 0.003,
+          "effective_threshold": 0.2,
+          "baseline_categories": 2,
+          "current_categories": 2,
+          "alert": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>SchemaGuard — Corrections</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:13px;-webkit-font-smoothing:antialiased}
+:root{--surf:#161b22;--surf2:#1c2129;--brd:#30363d;--brdl:#3d444e;--txt:#c9d1d9;--mut:#8b949e;--acc:#58a6ff;--tru:#238636;--flg:#d29922;--qua:#da3633}
+.tag{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.03em}
+.sidebar{position:fixed;left:0;top:0;width:256px;height:100vh;background:linear-gradient(180deg,#1c2129 0%,#161b22 100%);border-right:1px solid var(--brd);display:flex;flex-direction:column}
+.nav-link{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:13px;color:var(--mut);border:1px solid transparent;margin-bottom:2px}
+.nav-link.active{background:rgba(88,166,255,.1);border-color:rgba(88,166,255,.18);color:#58a6ff;font-weight:600}
+.header{position:fixed;left:256px;right:0;top:0;height:56px;background:rgba(22,27,34,.85);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 32px}
+.main{margin-left:256px;margin-top:56px;padding:32px}
+.diff-old{background:rgba(218,54,51,.12);color:#ffa0a0;padding:3px 8px;border-radius:5px;font-family:monospace;font-size:11px;display:inline-block}
+.diff-new{background:rgba(35,134,54,.12);color:#7ee787;padding:3px 8px;border-radius:5px;font-family:monospace;font-size:11px;display:inline-block}
+</style></head><body>
+<div class="sidebar"><div style="padding:24px;border-bottom:1px solid var(--brd)"><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:rgba(88,166,255,.15);border:1px solid rgba(88,166,255,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#58a6ff">SG</div><div><div style="font-size:15px;font-weight:800;color:#fff">SchemaGuard</div><div style="font-size:9px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase">Validation Console</div></div></div></div><nav style="flex:1;padding:12px"><div class="nav-link"><span style="width:20px;text-align:center;font-size:13px">◈</span>Dashboard</div><div class="nav-link active"><span style="width:20px;text-align:center;font-size:13px">⬡</span>Validate</div><div class="nav-link"><span style="width:20px;text-align:center;font-size:13px">⬡⬡</span>Batch</div><div class="nav-link"><span style="width:20px;text-align:center;font-size:13px">▦</span>Rules Library</div><div class="nav-link"><span style="width:20px;text-align:center;font-size:13px">≡</span>Audit Trail</div><div class="nav-link"><span style="width:20px;text-align:center;font-size:13px">◎</span>Use Cases</div></nav><div style="padding:16px;border-top:1px solid var(--brd)"><div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:8px">System Status</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Validation Engine</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Scoring Pipeline</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Drift Detection</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Async Queue</div><div style="font-size:10px;color:rgba(139,148,158,.4);margin-top:8px">v0.3.0 · 2 domains · 10 rules</div></div></div><div class="header"><span style="font-size:11px;color:var(--mut)">SchemaGuard Console</span><div style="flex:1"></div><span style="font-size:11px;color:var(--mut);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#238636"></span>All Systems Operational</span></div>
+<div class="main">
+  <h1 style="font-size:24px;font-weight:800;color:#fff;margin-bottom:4px">Validate Record</h1>
+  <p style="font-size:13px;color:var(--mut);margin-bottom:24px">Full 4-stage pipeline · structural → semantic → confidence → routing</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <select style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:8px 12px;color:var(--txt);font-size:13px"><option>💰 Financial Loan Application</option></select>
+      <select style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:8px 12px;color:var(--txt);font-size:13px"><option>❌ invalid — FN-seed-005 — extreme LTI ratio 52x</option></select>
+      <textarea style="background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:16px;color:var(--txt);font-family:monospace;font-size:11px;height:200px;resize:none;line-height:1.6">{
+  "application_id": "LA-33190",
+  "annual_income": 48000,
+  "loan_amount": 2500000,
+  "credit_score": 680,
+  "loan_purpose": "home_purchase",
+  ...
+}</textarea>
+      <button style="background:#1f6feb;border:1px solid rgba(88,166,255,.3);color:#fff;font-weight:600;padding:12px;border-radius:12px;font-size:13px">⬡  Validate Record</button>
+      <button style="background:rgba(210,153,34,.1);border:1px solid rgba(210,153,34,.3);color:#e3b341;font-weight:600;padding:10px;border-radius:12px;font-size:12px">🔧  Suggest Corrections</button>
+      <button style="background:rgba(35,134,54,.12);border:1px solid rgba(35,134,54,.3);color:#3fb950;font-weight:600;padding:10px;border-radius:12px;font-size:12px">⚡  Apply Auto-Fixes (1 correction)</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="background:rgba(210,153,34,.14);border:1px solid rgba(210,153,34,.4);border-radius:16px;padding:18px;display:flex;align-items:center;gap:16px">
+        <svg width="120" height="70" viewBox="0 0 136 80" style="overflow:visible;flex-shrink:0">
+          <path d="M16 68 A52 52 0 0 1 120 68" fill="none" stroke="#30363d" stroke-width="8" stroke-linecap="round"/>
+          <path d="M16 68 A52 52 0 0 1 120 68" fill="none" stroke="#e3b341" stroke-width="8" stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="49"/>
+          <text x="68" y="60" text-anchor="middle" fill="#e3b341" font-size="22" font-weight="800" font-family="monospace">0.70</text>
+          <text x="68" y="76" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="2">CONFIDENCE</text>
+        </svg>
+        <div style="font-size:24px;font-weight:900;color:#e3b341">! FLAGGED</div>
+      </div>
+      <div style="display:flex;background:var(--surf2);border:1px solid var(--brd);border-radius:12px;overflow:hidden">
+        <div style="flex:1;padding:10px;text-align:center;font-size:11px;font-weight:600;color:var(--mut)">⬡  Violations</div>
+        <div style="flex:1;padding:10px;text-align:center;font-size:11px;font-weight:600;background:rgba(88,166,255,.15);color:#58a6ff">🔧  Corrections</div>
+      </div>
+      <div style="background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.15);border-radius:12px;padding:14px">
+        <p style="font-size:12px;color:rgba(173,186,199,.8);line-height:1.5;margin-bottom:10px">1 rule violation. 1 can be auto-corrected (exact fix computed).</p>
+        <div style="display:flex;gap:8px">
+          <span class="tag" style="background:rgba(35,134,54,.15);color:#3fb950;border:1px solid rgba(35,134,54,.3)">⚡ 1 auto-fixable</span>
+          <span class="tag" style="background:rgba(218,54,51,.15);color:#f85149;border:1px solid rgba(218,54,51,.3)">🔍 0 manual review</span>
+        </div>
+      </div>
+      <div style="background:var(--surf2);border:1px solid rgba(210,153,34,.25);border-left:3px solid var(--flg);border-radius:12px;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--brd)">
+          <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-002</span>
+          <span class="tag" style="background:rgba(35,134,54,.12);color:#3fb950;border:1px solid rgba(35,134,54,.3)">⚡ Auto-fix</span>
+        </div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:10px">
+          <div>
+            <div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:5px">Why it failed</div>
+            <p style="font-size:11px;color:#adbac7;line-height:1.5">Loan ($2,500,000) is 52.1× income ($48,000). Maximum allowed is 10×. Violates CFPB Ability-to-Repay rules — loan ineligible for QM safe-harbour.</p>
+          </div>
+          <div style="background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.12);border-radius:8px;padding:10px">
+            <div style="font-size:10px;color:#58a6ff;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:5px">How to fix</div>
+            <p style="font-size:11px;color:rgba(173,186,199,.85);line-height:1.5">Reduce <span style="font-family:monospace;color:#58a6ff">loan_amount</span> to ≤$480,000 (10× income), or verify all qualifying income sources and co-applicant details.</p>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:6px">Field correction</div>
+            <div style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px">
+              <div style="font-family:monospace;font-size:11px;color:#58a6ff;margin-bottom:8px">loan_amount</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div>
+                  <div style="font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Current</div>
+                  <span class="diff-old">2500000</span>
+                </div>
+                <div>
+                  <div style="font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Suggested</div>
+                  <span class="diff-new">480000</span>
+                </div>
+              </div>
+              <p style="font-size:10px;color:var(--mut);margin-top:6px">Maximum at 10× income ($48,000) = $480,000</p>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--brd);padding-top:8px">
+            <div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:3px">Regulatory reference</div>
+            <p style="font-size:11px;color:rgba(139,148,158,.7);font-style:italic">CFPB Regulation Z §1026.43(c) — Ability-to-Repay · Fannie Mae Selling Guide B3-6-02</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></body></html>

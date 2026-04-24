@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560"
+     font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<defs>
+  <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#0d1117"/>
+    <stop offset="100%" style="stop-color:#161b22"/>
+  </linearGradient>
+  <filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.35"/></filter>
+  <marker id="mB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#58a6ff"/></marker>
+  <marker id="mR" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#f85149"/></marker>
+  <marker id="mG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#3fb950"/></marker>
+  <marker id="mO" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#e3b341"/></marker>
+</defs>
+<rect width="960" height="560" fill="url(#bgG)"/>
+<text x="480" y="36" text-anchor="middle" font-size="17" font-weight="700" fill="#c9d1d9">SchemaGuard - Validation Pipeline Flow</text>
+<text x="480" y="56" text-anchor="middle" font-size="11" fill="#8b949e">Four deterministic stages - sub-millisecond per record - full audit trail</text>
+<line x1="80" y1="68" x2="880" y2="68" stroke="#30363d" stroke-width="1"/>
+<!-- Column labels -->
+<text x="100" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">INPUT</text>
+<text x="290" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">STAGE 1</text>
+<text x="450" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">STAGE 2</text>
+<text x="620" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">STAGE 3</text>
+<text x="790" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">STAGE 4 + OUTPUT</text>
+<!-- Input JSON -->
+<rect x="40" y="108" width="120" height="130" rx="9" fill="#1c2129" stroke="#30363d" stroke-width="1.5" filter="url(#sh)"/>
+<text x="100" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#c9d1d9">JSON Record</text>
+<line x1="50" y1="138" x2="150" y2="138" stroke="#21262d" stroke-width="1"/>
+<text x="60" y="153" font-size="8.5" fill="#8b949e" font-family="monospace">{</text>
+<text x="66" y="165" font-size="8.5" fill="#3fb950" font-family="monospace">"patient_id":</text>
+<text x="66" y="177" font-size="8.5" fill="#3fb950" font-family="monospace">"admission":</text>
+<text x="66" y="189" font-size="8.5" fill="#f85149" font-family="monospace">"discharge":</text>
+<text x="66" y="201" font-size="8.5" fill="#3fb950" font-family="monospace">"patient_age":</text>
+<text x="60" y="213" font-size="8.5" fill="#8b949e" font-family="monospace">}</text>
+<text x="100" y="230" text-anchor="middle" font-size="9" fill="rgba(88,166,255,0.6)">structured JSON</text>
+<line x1="160" y1="173" x2="204" y2="173" stroke="#58a6ff" stroke-width="2" marker-end="url(#mB)"/>
+<!-- Stage 1 -->
+<rect x="206" y="108" width="168" height="130" rx="9" fill="#161b22" stroke="rgba(218,54,51,0.4)" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="206" y="108" width="168" height="6" rx="4" fill="#da3633"/>
+<text x="290" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#c9d1d9">Structural Validation</text>
+<text x="290" y="146" text-anchor="middle" font-size="9" fill="#8b949e">JSON Schema Draft 7</text>
+<line x1="216" y1="153" x2="364" y2="153" stroke="#21262d" stroke-width="1"/>
+<text x="216" y="167" font-size="9" fill="#8b949e">Required fields present</text>
+<text x="216" y="180" font-size="9" fill="#8b949e">Types correct (int/str/date)</text>
+<text x="216" y="193" font-size="9" fill="#8b949e">Format patterns match</text>
+<text x="216" y="206" font-size="9" fill="#8b949e">Enum values valid</text>
+<text x="290" y="227" text-anchor="middle" font-size="9" fill="rgba(218,54,51,0.8)">FAIL: conf = 0.0</text>
+<line x1="290" y1="238" x2="290" y2="292" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#mR)"/>
+<rect x="230" y="293" width="120" height="36" rx="6" fill="rgba(218,54,51,0.12)" stroke="rgba(218,54,51,0.3)" stroke-width="1"/>
+<text x="290" y="308" text-anchor="middle" font-size="10" font-weight="700" fill="#f85149">QUARANTINED</text>
+<text x="290" y="322" text-anchor="middle" font-size="8.5" fill="#8b949e">confidence = 0.0</text>
+<line x1="374" y1="173" x2="418" y2="173" stroke="#3fb950" stroke-width="2" marker-end="url(#mG)"/>
+<text x="396" y="166" text-anchor="middle" font-size="9" fill="#3fb950">PASS</text>
+<!-- Stage 2 -->
+<rect x="420" y="108" width="168" height="130" rx="9" fill="#161b22" stroke="rgba(218,54,51,0.4)" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="420" y="108" width="168" height="6" rx="4" fill="#da3633"/>
+<text x="504" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#c9d1d9">Semantic Rules</text>
+<text x="504" y="146" text-anchor="middle" font-size="9" fill="#8b949e">10 cross-field logical checks</text>
+<line x1="430" y1="153" x2="578" y2="153" stroke="#21262d" stroke-width="1"/>
+<text x="434" y="167" font-size="8.5" fill="#da3633">HC-001</text><text x="466" y="167" font-size="8.5" fill="#8b949e">age matches DOB</text>
+<text x="434" y="179" font-size="8.5" fill="#da3633">HC-002</text><text x="466" y="179" font-size="8.5" fill="#8b949e">admit after birth</text>
+<text x="434" y="191" font-size="8.5" fill="#da3633">HC-003</text><text x="466" y="191" font-size="8.5" fill="#8b949e">discharge >= admit</text>
+<text x="434" y="203" font-size="8.5" fill="#d29922">HC-004</text><text x="466" y="203" font-size="8.5" fill="#8b949e">age-appropriate Dx</text>
+<text x="434" y="215" font-size="8.5" fill="#d29922">HC-005</text><text x="466" y="215" font-size="8.5" fill="#8b949e">medication plausible</text>
+<text x="504" y="230" text-anchor="middle" font-size="8.5" fill="rgba(210,153,34,0.7)">+ 5 finance rules</text>
+<line x1="588" y1="173" x2="630" y2="173" stroke="#58a6ff" stroke-width="2" marker-end="url(#mB)"/>
+<!-- Stage 3 -->
+<rect x="632" y="108" width="168" height="130" rx="9" fill="#161b22" stroke="rgba(88,166,255,0.35)" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="632" y="108" width="168" height="6" rx="4" fill="#58a6ff"/>
+<text x="716" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#c9d1d9">Confidence Scoring</text>
+<text x="716" y="146" text-anchor="middle" font-size="9" fill="#8b949e">severity-weighted penalty</text>
+<line x1="642" y1="153" x2="790" y2="153" stroke="#21262d" stroke-width="1"/>
+<text x="716" y="171" text-anchor="middle" font-size="10.5" fill="#58a6ff" font-family="monospace">score = 1.0</text>
+<text x="716" y="186" text-anchor="middle" font-size="10.5" fill="#f85149" font-family="monospace">- 0.30 x critical</text>
+<text x="716" y="201" text-anchor="middle" font-size="10.5" fill="#e3b341" font-family="monospace">- 0.12 x warning</text>
+<line x1="650" y1="210" x2="782" y2="210" stroke="#21262d" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="716" y="224" text-anchor="middle" font-size="9" fill="#8b949e">clamped to [0.0, 1.0]</text>
+<text x="716" y="234" text-anchor="middle" font-size="9" fill="#8b949e">float score output</text>
+<!-- Score examples -->
+<rect x="40" y="360" width="860" height="80" rx="10" fill="#0d1117" stroke="#21262d" stroke-width="1"/>
+<text x="480" y="381" text-anchor="middle" font-size="10" font-weight="600" fill="#8b949e">CONFIDENCE SCORE EXAMPLES</text>
+<rect x="65" y="390" width="150" height="36" rx="7" fill="rgba(35,134,54,0.1)" stroke="rgba(35,134,54,0.3)" stroke-width="1"/>
+<text x="140" y="406" text-anchor="middle" font-size="10" font-weight="700" fill="#3fb950">score = 1.00</text>
+<text x="140" y="420" text-anchor="middle" font-size="8.5" fill="#8b949e">0 violations - trusted</text>
+<rect x="240" y="390" width="150" height="36" rx="7" fill="rgba(35,134,54,0.08)" stroke="rgba(35,134,54,0.25)" stroke-width="1"/>
+<text x="315" y="406" text-anchor="middle" font-size="10" font-weight="700" fill="#3fb950">score = 0.88</text>
+<text x="315" y="420" text-anchor="middle" font-size="8.5" fill="#8b949e">1 warning - trusted*</text>
+<rect x="415" y="390" width="150" height="36" rx="7" fill="rgba(210,153,34,0.1)" stroke="rgba(210,153,34,0.3)" stroke-width="1"/>
+<text x="490" y="406" text-anchor="middle" font-size="10" font-weight="700" fill="#e3b341">score = 0.70</text>
+<text x="490" y="420" text-anchor="middle" font-size="8.5" fill="#8b949e">1 critical - flagged</text>
+<rect x="590" y="390" width="150" height="36" rx="7" fill="rgba(218,54,51,0.1)" stroke="rgba(218,54,51,0.3)" stroke-width="1"/>
+<text x="665" y="406" text-anchor="middle" font-size="10" font-weight="700" fill="#f85149">score = 0.40</text>
+<text x="665" y="420" text-anchor="middle" font-size="8.5" fill="#8b949e">2 critical - quarantined</text>
+<rect x="765" y="390" width="150" height="36" rx="7" fill="rgba(218,54,51,0.12)" stroke="rgba(218,54,51,0.35)" stroke-width="1"/>
+<text x="840" y="406" text-anchor="middle" font-size="10" font-weight="700" fill="#f85149">score = 0.10</text>
+<text x="840" y="420" text-anchor="middle" font-size="8.5" fill="#8b949e">3 critical (cascade)</text>
+<!-- Stage 4 -->
+<rect x="632" y="290" width="168" height="50" rx="8" fill="#1c2129" stroke="#30363d" stroke-width="1.5"/>
+<text x="716" y="312" text-anchor="middle" font-size="11" font-weight="700" fill="#c9d1d9">Decision Router</text>
+<text x="716" y="328" text-anchor="middle" font-size="9" fill="#8b949e">thresholds: 0.85 / 0.50</text>
+<line x1="716" y1="238" x2="716" y2="290" stroke="#58a6ff" stroke-width="1.8" marker-end="url(#mB)"/>
+<line x1="800" y1="305" x2="840" y2="305" stroke="#3fb950" stroke-width="1.5" marker-end="url(#mG)"/>
+<text x="845" y="301" font-size="9" fill="#3fb950" font-weight="600">TRUSTED</text>
+<text x="845" y="313" font-size="8.5" fill="#8b949e">pass through</text>
+<line x1="800" y1="320" x2="840" y2="334" stroke="#e3b341" stroke-width="1.5" marker-end="url(#mO)"/>
+<text x="845" y="330" font-size="9" fill="#e3b341" font-weight="600">FLAGGED</text>
+<text x="845" y="342" font-size="8.5" fill="#8b949e">review queue</text>
+<text x="140" y="432" text-anchor="middle" font-size="8" fill="rgba(139,148,158,0.6)">*violation recorded</text>
+<!-- Drift band -->
+<rect x="40" y="458" width="860" height="44" rx="8" fill="rgba(88,166,255,0.04)" stroke="rgba(88,166,255,0.2)" stroke-width="1"/>
+<text x="160" y="476" font-size="10" font-weight="600" fill="#58a6ff">Drift Monitor</text>
+<text x="165" y="492" font-size="9" fill="#8b949e">runs orthogonally on batch aggregates</text>
+<line x1="310" y1="464" x2="310" y2="495" stroke="#21262d" stroke-width="1"/>
+<text x="420" y="476" font-size="9" fill="#8b949e">z-score shift (threshold: 1.5 sigma)</text>
+<text x="420" y="492" font-size="9" fill="#8b949e">PSI on categorical distributions (threshold: 0.20)</text>
+<line x1="680" y1="464" x2="680" y2="495" stroke="#21262d" stroke-width="1"/>
+<text x="780" y="476" font-size="9" fill="#8b949e">null-rate delta (+15%)</text>
+<text x="780" y="492" font-size="9" fill="#8b949e">violation-rate delta (+10%)</text>
+<text x="480" y="528" text-anchor="middle" font-size="9" fill="#8b949e">Every decision appended to JSONL audit log - record ID, rules, penalties, routing, explanation</text>
+</svg>

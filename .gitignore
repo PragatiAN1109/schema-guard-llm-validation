@@ -1,0 +1,73 @@
+# ============================================================
+# SchemaGuard .gitignore
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+env/
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment — NEVER commit API keys
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database / audit logs (generated at runtime)
+*.db
+*.sqlite3
+audit_logs/
+
+# RAG vector store (rebuild with: python rag/vector_store.py --build)
+rag/store/index.faiss
+rag/store/metadata.json
+rag/store/manifest.json
+
+# Sentence-transformer model cache
+.cache/
+sentence_transformers_cache/
+
+# Generated datasets (regenerate with: ./generate_dataset.sh)
+data/healthcare_dataset.json
+data/finance_dataset.json
+data/dataset_summary.csv
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Temp / scratch files
+*.tmp
+demo/_tail_fix.tmp
+
+# Node (frontend)
+node_modules/
+.next/
+frontend/.env.local
+
+# Coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Plots — tracked so they render on GitHub
+# outputs/plots/*.png   ← uncomment to exclude from git

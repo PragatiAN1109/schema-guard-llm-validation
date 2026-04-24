@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "schemaguard"
+version = "0.3.0"
+description = "Semantic validation and drift detection for LLM-generated structured outputs"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Pragati Narotam" }
+]
+keywords = [
+    "llm", "validation", "semantic", "drift-detection", "rag",
+    "healthcare", "finance", "json-schema", "prompt-engineering"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "pydantic>=2.0.0",
+    "python-multipart>=0.0.9",
+    "anthropic>=0.26.0",
+    "python-dotenv>=1.0.0",
+    "jsonschema>=4.17.0",
+    "faiss-cpu>=1.7.4",
+    "sentence-transformers>=2.7.0",
+    "pdfplumber>=0.10.0",
+    "pandas>=2.0.0",
+    "numpy>=1.26.0",
+    "matplotlib>=3.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ipykernel>=6.29.0",
+    "nbformat>=5.9.0",
+    "nbconvert>=7.0.0",
+]
+ui = [
+    "streamlit>=1.32.0",
+    "plotly>=5.18.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/pragatinarote/schema-guard-llm-validation"
+Repository = "https://github.com/pragatinarote/schema-guard-llm-validation"
+Issues = "https://github.com/pragatinarote/schema-guard-llm-validation/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["evaluation"]
+python_files = ["*_test.py", "test_*.py"]
+python_functions = ["test_*"]
+
+[tool.setuptools.packages.find]
+exclude = [
+    "frontend*", "node_modules*", ".git*",
+    "__pycache__*", "*.egg-info*"
+]

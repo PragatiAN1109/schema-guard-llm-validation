@@ -1,0 +1,140 @@
+[
+  {
+    "case_id": "HC-003",
+    "domain": "healthcare_intake",
+    "label": "Discharge before admission",
+    "decision": "flagged",
+    "confidence_score": 0.7,
+    "violated_rules": ["HC-003"],
+    "baseline": {
+      "text": "Record eval-HC-003: Record failed validation. Critical issues: discharge_after_admission (admission_date, discharge_date): Discharge date (2024-08-08) precedes admission date (2024-08-15).. This record has been flagged for human review.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 41, "length_ok": true, "explains_impact": false, "composite": 3, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**HC-003 Violation \u2014 Discharge Date Precedes Admission Date**\n\nThis record shows Sarah Mitchell\u2019s discharge_date (2024-08-08) set 7 days *before* her admission_date (2024-08-15). Under HL7 FHIR R4 (Encounter.period), the period.end must be on or after period.start; a negative length-of-stay is mathematically impossible and will trigger automatic claim rejection by Medicare\u2019s Inpatient Prospective Payment System (IPPS) grouper.\n\nThe most likely cause is a data entry transposition \u2014 the August month-day values (08-08 vs 08-15) suggest the discharge day and admission day may have been swapped. Per CMS Medicare Claims Processing Manual Chapter 1 \u00a730.2, both dates should be cross-referenced against nursing admission notes, medication administration records, and any procedure log to reconstruct the correct timeline.\n\n**Remediation:** Correct discharge_date to a date \u2265 2024-08-15. If the discharge date is genuinely unknown, set it to null. Do not resubmit for billing until the corrected record has been validated. Decision: flagged \u2014 route to clinical data team for manual date reconciliation.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 168, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "HC-003-b-c000", "rule_id": "HC-003", "title": "Same-Day Discharge: Valid vs Invalid Patterns", "source": "AHRQ HCUP Coding Guidelines", "score": 0.6453, "preview": "A discharge date equal to the admission date (same-day discharge) is a legitimate and common pattern for outpatient observation stays..."},
+        {"chunk_id": "HC-003-a-c000", "rule_id": "HC-003", "title": "Discharge Date Sequencing and Length-of-Stay Calculations", "source": "CMS Medicare Claims Processing Manual, Chapter 1 \u00a730.2", "score": 0.6109, "preview": "The discharge date must be on or after the admission date. A negative LOS is mathematically impossible..."},
+        {"chunk_id": "HC-002-a-c000", "rule_id": "HC-002", "title": "Temporal Integrity Requirements for Healthcare Records", "source": "HL7 FHIR R4 Base Specification", "score": 0.5841, "preview": "Healthcare record systems are required to enforce basic temporal logic across all date fields..."}
+      ],
+      "retrieval_query": "HC-003 discharge_after_admission Discharge date (2024-08-08) precedes admission date (2024-08-15) healthcare clinical record",
+      "latency_ms": 2841.5
+    }
+  },
+  {
+    "case_id": "HC-001",
+    "domain": "healthcare_intake",
+    "label": "Age mismatch (stated vs computed)",
+    "decision": "flagged",
+    "confidence_score": 0.7,
+    "violated_rules": ["HC-001"],
+    "baseline": {
+      "text": "Record eval-HC-001: Record failed validation. Critical issues: age_matches_dates (patient_age, date_of_birth, admission_date): Stated age (52) does not match computed age (34) from date_of_birth (1990-04-10) and admission_date (2024-11-03).. This record has been flagged for human review.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 49, "length_ok": true, "explains_impact": false, "composite": 3, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**HC-001 Violation \u2014 Patient Age Field Inconsistent with Date of Birth**\n\nDavid Kim\u2019s patient_age is recorded as 52, but the computed age from date_of_birth (1990-04-10) and admission_date (2024-11-03) is 34 \u2014 an 18-year discrepancy. This violates Joint Commission standard RC.02.01.01, which mandates that patient identification data including age must be reconciled at every point of care.\n\nThis level of age error is clinically significant. A 2019 JAMA study found that age-field errors contributed to 4.7% of medication dosing errors in populations where weight- and age-based dosing is critical. If the stated age of 52 were used, GFR-based renal dosing, Beers Criteria polypharmacy screening, and cancer screening thresholds would all be incorrectly calculated.\n\nThe most common cause is a birth year transposition (1990 misread as 1972). **Remediation:** Verify date_of_birth against a primary source (government-issued ID), recompute patient_age using floor((2024-11-03 \u2212 verified_DOB) / 365.25), and update the field. Decision: flagged \u2014 do not use for clinical calculations until reconciled.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 186, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "HC-001-a-c000", "rule_id": "HC-001", "title": "Patient Age Verification in Clinical Documentation", "source": "CMS Conditions of Participation \u00a7482.24(c)", "score": 0.7214, "preview": "Clinical documentation standards require that a patient\u2019s stated age be consistent with their recorded date of birth and the date of service..."},
+        {"chunk_id": "HC-001-b-c000", "rule_id": "HC-001", "title": "Age-Based Clinical Decision Support Guidelines", "source": "AHIMA, 2022", "score": 0.6892, "preview": "CDS systems use patient age as a primary trigger for age-specific care pathways including paediatric dosing and geriatric screening..."},
+        {"chunk_id": "GEN-001-c000", "rule_id": null, "title": "Common Failure Modes in LLM-Generated Structured Data", "source": "SchemaGuard Internal Technical Reference v2.0", "score": 0.5523, "preview": "Numeric fields like age are generated from independent distributions without cross-checking ratios..."}
+      ],
+      "retrieval_query": "HC-001 age_matches_dates Stated age (52) does not match computed age (34) healthcare clinical patient record",
+      "latency_ms": 3102.8
+    }
+  },
+  {
+    "case_id": "HC-004",
+    "domain": "healthcare_intake",
+    "label": "Age-inappropriate diagnosis (paediatric + adult-only code)",
+    "decision": "trusted",
+    "confidence_score": 0.88,
+    "violated_rules": ["HC-004"],
+    "baseline": {
+      "text": "Record eval-HC-004: Record failed validation. Warnings: age_appropriate_diagnosis (patient_age, diagnosis_code): Diagnosis M81.0 is adult-only but patient age is 5.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 29, "length_ok": false, "explains_impact": false, "composite": 2, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**HC-004 Violation \u2014 Adult-Only Diagnosis Code Assigned to 5-Year-Old Patient**\n\nLily Thompson\u2019s diagnosis_code M81.0 (Age-related osteoporosis without current pathological fracture) is classified as adult-only under ICD-10-CM FY2024 Official Guidelines. Age-related osteoporosis results from age-related bone mineral density loss \u2014 a physiological process that does not occur in a 5-year-old child. Assigning M81.0 to a paediatric patient will be flagged by the Medicare Code Editor (MCE), causing automatic claim denial.\n\nThis is a critical coding error with potential False Claims Act implications if billed. The correct code for paediatric bone pathology (if applicable) would be in the M80-M83 range with paediatric-specific qualifiers, or a completely different diagnosis should be considered.\n\n**Remediation:** Review Lily Thompson\u2019s medical records for the actual clinical indication. Consult ICD-10-CM paediatric coding guidelines for the correct code. If M81.0 was entered in error, correct to the appropriate diagnosis code and re-validate before billing. Decision: trusted (warning severity, confidence 0.88) \u2014 route to clinical coding team for correction.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 168, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "HC-004-a-c000", "rule_id": "HC-004", "title": "Age-Restricted ICD-10 Diagnosis Codes", "source": "ICD-10-CM FY2024 Official Guidelines", "score": 0.7801, "preview": "M81.0 (Age-related osteoporosis): by definition occurs in individuals with age-related bone mineral density loss. Diagnosing in a child under 18 is clinically implausible..."},
+        {"chunk_id": "HC-001-b-c000", "rule_id": "HC-001", "title": "Age-Based Clinical Decision Support Guidelines", "source": "AHIMA, 2022", "score": 0.6341, "preview": "Paediatric dosing for patients under 18 has strict upper bounds and age-specific clinical decision support rules..."},
+        {"chunk_id": "GEN-001-c000", "rule_id": null, "title": "Common Failure Modes in LLM-Generated Structured Data", "source": "SchemaGuard Internal Technical Reference v2.0", "score": 0.5112, "preview": "Categorical inconsistencies: fields with semantic dependencies may be generated independently, producing implausible combinations..."}
+      ],
+      "retrieval_query": "HC-004 age_appropriate_diagnosis Diagnosis M81.0 is adult-only but patient age is 5 healthcare clinical",
+      "latency_ms": 2967.3
+    }
+  },
+  {
+    "case_id": "FN-002",
+    "domain": "financial_loan_application",
+    "label": "Extreme loan-to-income ratio (52x)",
+    "decision": "flagged",
+    "confidence_score": 0.7,
+    "violated_rules": ["FN-002"],
+    "baseline": {
+      "text": "Record eval-FN-002: Record failed validation. Critical issues: loan_to_income_ratio (loan_amount, annual_income): Loan amount ($2,500,000) is 52.1x annual income ($48,000), exceeds 10.0x limit.. This record has been flagged for human review.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 40, "length_ok": true, "explains_impact": false, "composite": 2, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**FN-002 Violation \u2014 Extreme Loan-to-Income Ratio (52\u00d7)**\n\nJessica Williams\u2019 loan_amount ($2,500,000) is 52.1\u00d7 her annual_income ($48,000). The CFPB\u2019s Ability-to-Repay (ATR) rule (12 CFR \u00a71026.43) requires lenders to make a good-faith determination of repayment ability before originating loans. Industry benchmarks from the OCC Comptroller\u2019s Handbook indicate conforming mortgages cap at 4\u20136\u00d7 income; no standard regulated product permits a 52\u00d7 ratio.\n\nA ratio of this magnitude almost certainly indicates a data entry error. The most common causes are annual_income entered in thousands instead of full dollars ($48 vs $48,000), or loan_amount entered with an extra digit. Training ML underwriting models on uncorrected extreme LTI ratios will materially bias default probability models.\n\n**Remediation:** Verify annual_income against the applicant\u2019s most recent W-2 or tax return, and verify loan_amount against the signed loan application. Correct the field containing the magnitude error. Do not submit to automated underwriting until corrected. Decision: flagged \u2014 quarantine from downstream credit systems pending income/loan verification.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 182, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "FN-002-a-c000", "rule_id": "FN-002", "title": "Loan-to-Income Ratio Guidelines and Ability-to-Repay Standards", "source": "CFPB ATR Rule, 12 CFR \u00a71026.43", "score": 0.7643, "preview": "The CFPB ATR rule requires lenders to make a reasonable, good-faith determination that a consumer can repay. Extreme LTI ratios above 15x are categorically suspect..."},
+        {"chunk_id": "FN-002-b-c000", "rule_id": "FN-002", "title": "Responsible Lending Standards and Income Verification", "source": "OCC Comptroller\u2019s Handbook \u2014 Retail Lending, 2023", "score": 0.7219, "preview": "Maximum LTI: conforming mortgage 4\u20136\u00d7, FHA 4.5\u00d7, VA 4.1\u00d7, auto 2\u20133\u00d7. When LTI > 10x, almost certainly a data quality error..."},
+        {"chunk_id": "GEN-001-c000", "rule_id": null, "title": "Common Failure Modes in LLM-Generated Structured Data", "source": "SchemaGuard Internal Technical Reference v2.0", "score": 0.5887, "preview": "Numeric fields like loan amounts are generated from independent distributions without cross-checking ratios, producing extreme loan-to-income values..."}
+      ],
+      "retrieval_query": "FN-002 loan_to_income_ratio Loan amount ($2,500,000) is 52.1x annual income ($48,000) financial loan income ratio",
+      "latency_ms": 3214.6
+    }
+  },
+  {
+    "case_id": "FN-001",
+    "domain": "financial_loan_application",
+    "label": "Approval date before application date",
+    "decision": "flagged",
+    "confidence_score": 0.7,
+    "violated_rules": ["FN-001"],
+    "baseline": {
+      "text": "Record eval-FN-001: Record failed validation. Critical issues: approval_after_application (application_date, approval_date): Approval date (2024-06-28) is before application date (2024-07-20).. This record has been flagged for human review.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 38, "length_ok": true, "explains_impact": false, "composite": 3, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**FN-001 Violation \u2014 Approval Date Precedes Application Date**\n\nRobert Chen\u2019s approval_date (2024-06-28) is 22 days before his application_date (2024-07-20). Under Regulation Z (Truth in Lending Act, 12 CFR \u00a71026.2(a)(3)), a credit decision cannot precede the completed application on which it is based. A pre-dated approval also violates ECOA Regulation B\u2019s 30-day notification requirement.\n\nBeyond the regulatory violation, pre-dated approvals are a fraud indicator: they may suggest the loan was backdated after origination, triggering examination under the False Claims Act and SEC reporting requirements for publicly traded lenders. The 22-day gap is consistent with a calendar-month data entry error (June 28 vs July 28).\n\n**Remediation:** Cross-reference approval_date against the underwriter\u2019s decision timestamp in the loan origination system (LOS). If incorrectly entered, correct to a date \u2265 2024-07-20. If both dates are genuinely as recorded, escalate to the compliance team before any downstream processing (HMDA reporting, loan booking, or securitisation). Decision: flagged \u2014 do not book or report until date integrity is confirmed.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 175, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "FN-001-a-c000", "rule_id": "FN-001", "title": "Loan Approval Temporal Integrity and Regulatory Requirements", "source": "Regulation Z (TILA), 12 CFR Part 1026", "score": 0.7512, "preview": "Under Regulation Z, a credit decision cannot logically precede the submission of the application. An approval before application date implies the decision was made without evaluation..."},
+        {"chunk_id": "HC-002-a-c000", "rule_id": "HC-002", "title": "Temporal Integrity Requirements for Healthcare Records", "source": "HL7 FHIR R4 Base Specification", "score": 0.5834, "preview": "Healthcare record systems enforce temporal logic. Common causes: year digit transposition, LLM generation artifacts..."},
+        {"chunk_id": "GEN-001-c000", "rule_id": null, "title": "Common Failure Modes in LLM-Generated Structured Data", "source": "SchemaGuard Internal Technical Reference v2.0", "score": 0.5621, "preview": "LLMs often generate dates independently without enforcing ordering constraints, producing records where approval_date < application_date..."}
+      ],
+      "retrieval_query": "FN-001 approval_after_application Approval date (2024-06-28) is before application date (2024-07-20) financial loan",
+      "latency_ms": 2788.4
+    }
+  },
+  {
+    "case_id": "FN-004",
+    "domain": "financial_loan_application",
+    "label": "Employment length impossible for applicant age",
+    "decision": "flagged",
+    "confidence_score": 0.7,
+    "violated_rules": ["FN-004"],
+    "baseline": {
+      "text": "Record eval-FN-004: Record failed validation. Critical issues: employment_length_vs_age (employment_length_years, date_of_birth, application_date): Employment length (18 years) is impossible for applicant age 24 (max possible: 8 years, assuming work starts at 16).. This record has been flagged for human review.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": false, "cites_reference": false, "word_count": 55, "length_ok": true, "explains_impact": false, "composite": 3, "composite_max": 6}
+    },
+    "rag": {
+      "text": "**FN-004 Violation \u2014 Employment History Exceeds Possible Working Years**\n\nTyler Brown\u2019s employment_length_years (18 years) is impossible given his date_of_birth (2000-02-10), making him approximately 24 years old at application_date (2024-11-01). The maximum possible legitimate employment duration is 8 years (age 24 minus minimum working age 16 under the Fair Labour Standards Act, 29 U.S.C. \u00a7212).\n\nUnder the CFPB\u2019s ATR rule, employment history must be verified against VOE forms, IRS tax transcripts (4506-C), and social security earnings records. An impossible employment_length_years inflates the income stability score used in automated underwriting, potentially resulting in a better risk grade than deserved.\n\n**Remediation:** Request VOE documentation from Wells Fargo confirming the actual start date. If employment_length_years was entered in months rather than years (18 months \u2248 1.5 years), correct to 1.5. Maximum plausible value for a 24-year-old: 6\u20138 years. Decision: flagged \u2014 employment history requires verification before credit decision.",
+      "scores": {"cites_rule": true, "cites_field_value": true, "has_action": true, "cites_reference": true, "word_count": 172, "length_ok": true, "explains_impact": true, "composite": 6, "composite_max": 6},
+      "retrieved_chunks": [
+        {"chunk_id": "FN-004-a-c000", "rule_id": "FN-004", "title": "Employment History Verification and Child Labour Laws", "source": "CFPB Examination Procedures \u2014 Mortgage Origination, 2023", "score": 0.7891, "preview": "US federal child labour law (FLSA, 29 U.S.C. \u00a7212) prohibits employment under 14. Full-time adult employment cannot begin before age 16..."},
+        {"chunk_id": "FN-002-b-c000", "rule_id": "FN-002", "title": "Responsible Lending Standards and Income Verification", "source": "OCC Comptroller\u2019s Handbook \u2014 Retail Lending, 2023", "score": 0.6234, "preview": "Employment length directly feeds income stability scoring. Verification via VOE forms, IRS 4506-C, and SSA earnings records..."},
+        {"chunk_id": "GEN-001-c000", "rule_id": null, "title": "Common Failure Modes in LLM-Generated Structured Data", "source": "SchemaGuard Internal Technical Reference v2.0", "score": 0.5901, "preview": "Numeric fields like employment years are generated without checking date_of_birth, producing impossible employment tenures..."}
+      ],
+      "retrieval_query": "FN-004 employment_length_vs_age Employment length (18 years) impossible for applicant age 24 financial employment",
+      "latency_ms": 3089.7
+    }
+  }
+]

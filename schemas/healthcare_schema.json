@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HealthcareIntakeRecord",
+  "description": "Schema for healthcare patient intake records",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "first_name",
+    "last_name",
+    "date_of_birth",
+    "gender",
+    "admission_date",
+    "diagnosis_code",
+    "diagnosis_description",
+    "treating_physician"
+  ],
+  "properties": {
+    "patient_id": {
+      "type": "string",
+      "pattern": "^P-[0-9]{4,6}$",
+      "description": "Unique patient identifier (format: P-XXXX)"
+    },
+    "first_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "last_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date (YYYY-MM-DD)"
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "other", "unknown"]
+    },
+    "admission_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "discharge_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Null if patient is still admitted"
+    },
+    "diagnosis_code": {
+      "type": "string",
+      "pattern": "^[A-Z][0-9]{2}(\\.[0-9]{1,4})?$",
+      "description": "ICD-10 format diagnosis code"
+    },
+    "diagnosis_description": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 500
+    },
+    "treating_physician": {
+      "type": "string",
+      "minLength": 2
+    },
+    "medication": {
+      "type": ["string", "null"],
+      "description": "Primary prescribed medication, if any"
+    },
+    "procedure_code": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{5}$",
+      "description": "CPT procedure code (5-digit)"
+    },
+    "insurance_provider": {
+      "type": ["string", "null"]
+    },
+    "patient_age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 130,
+      "description": "Age at time of admission"
+    },
+    "emergency_admission": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "maxLength": 2000
+    }
+  },
+  "additionalProperties": false
+}

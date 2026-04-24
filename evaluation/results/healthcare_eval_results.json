@@ -1,0 +1,120 @@
+{
+  "domain": "healthcare_intake",
+  "total_records": 8,
+  "results": [
+    {
+      "record_id": "HC-seed-001",
+      "category": "valid",
+      "expected_semantic_valid": true,
+      "actual_semantic_valid": true,
+      "expected_violations": [],
+      "actual_violations": [],
+      "confidence_score": 1.0,
+      "decision": "trusted",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-002",
+      "category": "valid",
+      "expected_semantic_valid": true,
+      "actual_semantic_valid": true,
+      "expected_violations": [],
+      "actual_violations": [],
+      "confidence_score": 1.0,
+      "decision": "trusted",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-003",
+      "category": "valid",
+      "expected_semantic_valid": true,
+      "actual_semantic_valid": true,
+      "expected_violations": [],
+      "actual_violations": [],
+      "confidence_score": 1.0,
+      "decision": "trusted",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-004",
+      "category": "invalid",
+      "expected_semantic_valid": false,
+      "actual_semantic_valid": false,
+      "expected_violations": [
+        "HC-003"
+      ],
+      "actual_violations": [
+        "HC-003"
+      ],
+      "confidence_score": 0.7,
+      "decision": "flagged",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-005",
+      "category": "invalid",
+      "expected_semantic_valid": false,
+      "actual_semantic_valid": false,
+      "expected_violations": [
+        "HC-001"
+      ],
+      "actual_violations": [
+        "HC-001"
+      ],
+      "confidence_score": 0.7,
+      "decision": "flagged",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-006",
+      "category": "invalid",
+      "expected_semantic_valid": false,
+      "actual_semantic_valid": false,
+      "expected_violations": [
+        "HC-004"
+      ],
+      "actual_violations": [
+        "HC-004"
+      ],
+      "confidence_score": 0.88,
+      "decision": "trusted",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-007",
+      "category": "edge_case",
+      "expected_semantic_valid": true,
+      "actual_semantic_valid": true,
+      "expected_violations": [],
+      "actual_violations": [],
+      "confidence_score": 1.0,
+      "decision": "trusted",
+      "correct": true
+    },
+    {
+      "record_id": "HC-seed-008",
+      "category": "edge_case",
+      "expected_semantic_valid": true,
+      "actual_semantic_valid": true,
+      "expected_violations": [],
+      "actual_violations": [],
+      "confidence_score": 1.0,
+      "decision": "trusted",
+      "correct": true
+    }
+  ],
+  "metrics": {
+    "total_records": 8,
+    "true_positives": 3,
+    "false_positives": 0,
+    "true_negatives": 5,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "false_quarantine_rate": 0.0,
+    "mean_confidence_valid": 1.0,
+    "mean_confidence_invalid": 0.76,
+    "accuracy": 1.0
+  }
+}

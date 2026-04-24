@@ -1,0 +1,68 @@
+[
+  {
+    "label": "Valid Healthcare Record",
+    "record_id": "HC-demo-001",
+    "domain": "healthcare_intake",
+    "structural_valid": true,
+    "structural_errors": [],
+    "semantic_valid": true,
+    "violated_rules": [],
+    "confidence_score": 1.0,
+    "decision": "trusted",
+    "explanation": "Record HC-demo-001: Passed all validation checks. No issues found."
+  },
+  {
+    "label": "Invalid Healthcare Record — Discharge Before Admission",
+    "record_id": "HC-demo-002",
+    "domain": "healthcare_intake",
+    "structural_valid": true,
+    "structural_errors": [],
+    "semantic_valid": false,
+    "violated_rules": [
+      {
+        "rule_id": "HC-003",
+        "rule_name": "discharge_after_admission",
+        "passed": false,
+        "severity": "critical",
+        "fields": ["admission_date", "discharge_date"],
+        "message": "Discharge date (2024-08-08) precedes admission date (2024-08-15)"
+      }
+    ],
+    "confidence_score": 0.70,
+    "decision": "quarantined",
+    "explanation": "Record HC-demo-002: Record failed validation. Critical issues: discharge_after_admission (admission_date, discharge_date): Discharge date (2024-08-08) precedes admission date (2024-08-15). This record has been quarantined and should not be used downstream."
+  },
+  {
+    "label": "Valid Finance Record",
+    "record_id": "FN-demo-001",
+    "domain": "financial_loan_application",
+    "structural_valid": true,
+    "structural_errors": [],
+    "semantic_valid": true,
+    "violated_rules": [],
+    "confidence_score": 1.0,
+    "decision": "trusted",
+    "explanation": "Record FN-demo-001: Passed all validation checks. No issues found."
+  },
+  {
+    "label": "Invalid Finance Record — Loan 52x Income",
+    "record_id": "FN-demo-002",
+    "domain": "financial_loan_application",
+    "structural_valid": true,
+    "structural_errors": [],
+    "semantic_valid": false,
+    "violated_rules": [
+      {
+        "rule_id": "FN-002",
+        "rule_name": "loan_to_income_ratio",
+        "passed": false,
+        "severity": "critical",
+        "fields": ["loan_amount", "annual_income"],
+        "message": "Loan amount ($2,500,000) is 52.1x annual income ($48,000), exceeds 10.0x limit"
+      }
+    ],
+    "confidence_score": 0.70,
+    "decision": "quarantined",
+    "explanation": "Record FN-demo-002: Record failed validation. Critical issues: loan_to_income_ratio (loan_amount, annual_income): Loan amount ($2,500,000) is 52.1x annual income ($48,000), exceeds 10.0x limit. This record has been quarantined and should not be used downstream."
+  }
+]

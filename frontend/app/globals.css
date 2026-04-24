@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:           #0d1117;
+  --surface:      #161b22;
+  --surface-2:    #1c2129;
+  --surface-3:    #21262d;
+  --border:       #30363d;
+  --border-light: #3d444e;
+  --text:         #c9d1d9;
+  --muted:        #8b949e;
+  --accent:       #58a6ff;
+  --accent-glow:  rgba(88,166,255,0.15);
+  --trusted:      #238636;
+  --trusted-dim:  rgba(35,134,54,0.12);
+  --flagged:      #d29922;
+  --flagged-dim:  rgba(210,153,34,0.12);
+  --quarantined:  #da3633;
+  --quarantined-dim: rgba(218,54,51,0.12);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+/* ── Glow effects ── */
+.glow-trusted   { box-shadow: 0 0 0 1px rgba(35,134,54,.35), 0 4px 24px rgba(35,134,54,.18); }
+.glow-flagged   { box-shadow: 0 0 0 1px rgba(210,153,34,.35), 0 4px 24px rgba(210,153,34,.18); }
+.glow-quarantine{ box-shadow: 0 0 0 1px rgba(218,54,51,.35), 0 4px 24px rgba(218,54,51,.18); }
+.glow-accent    { box-shadow: 0 0 0 1px rgba(88,166,255,.25), 0 4px 20px rgba(88,166,255,.12); }
+
+/* ── Gradient backgrounds ── */
+.gradient-trusted    { background: linear-gradient(135deg, rgba(35,134,54,.18) 0%, rgba(35,134,54,.04) 100%); }
+.gradient-flagged    { background: linear-gradient(135deg, rgba(210,153,34,.18) 0%, rgba(210,153,34,.04) 100%); }
+.gradient-quarantine { background: linear-gradient(135deg, rgba(218,54,51,.18) 0%, rgba(218,54,51,.04) 100%); }
+.gradient-surface    { background: linear-gradient(160deg, #1c2129 0%, #161b22 100%); }
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes fill-bar {
+  from { width: 0%; }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in-up   { animation: fadeInUp  .35s ease both; }
+.animate-fade-in      { animation: fadeIn    .25s ease both; }
+.animate-count-up     { animation: count-up  .4s  cubic-bezier(.34,1.56,.64,1) both; }
+.animate-fill-bar     { animation: fill-bar  .6s  cubic-bezier(.34,1.12,.64,1) both; }
+
+/* Staggered children */
+.stagger > *:nth-child(1) { animation-delay: .05s; }
+.stagger > *:nth-child(2) { animation-delay: .10s; }
+.stagger > *:nth-child(3) { animation-delay: .15s; }
+.stagger > *:nth-child(4) { animation-delay: .20s; }
+.stagger > *:nth-child(5) { animation-delay: .25s; }
+
+/* ── Confidence arc SVG ── */
+.conf-arc-track { stroke: var(--border); }
+.conf-arc-trusted    { stroke: var(--trusted); }
+.conf-arc-flagged    { stroke: var(--flagged); }
+.conf-arc-quarantine { stroke: var(--quarantined); }
+
+/* ── Card hover lift ── */
+.card-hover {
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.card-hover:hover {
+  border-color: var(--border-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+
+/* ── Violation highlight row ── */
+.violation-row { position: relative; }
+.violation-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 2px 0 0 2px;
+}
+.violation-row.critical::before { background: var(--quarantined); }
+.violation-row.warning::before  { background: var(--flagged); }
+
+/* ── Tag pill ── */
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px; border-radius: 20px; font-size: 10px; font-weight: 600;
+  letter-spacing: .03em;
+}
+
+/* ── Code diff ── */
+.diff-old { background: rgba(218,54,51,.12); color: #ffa0a0; }
+.diff-new  { background: rgba(35,134,54,.12); color: #7ee787; }
+
+/* ── Shimmer skeleton ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 6px;
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>SchemaGuard — Rules Library</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:13px;-webkit-font-smoothing:antialiased}:root{--surf:#161b22;--surf2:#1c2129;--brd:#30363d;--txt:#c9d1d9;--mut:#8b949e;--acc:#58a6ff}.tag{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.03em}.sidebar{position:fixed;left:0;top:0;width:256px;height:100vh;background:linear-gradient(180deg,#1c2129 0%,#161b22 100%);border-right:1px solid var(--brd);display:flex;flex-direction:column}.nav-link{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font-size:13px;color:var(--mut);border:1px solid transparent;margin-bottom:2px}.nav-link.active{background:rgba(88,166,255,.1);border-color:rgba(88,166,255,.18);color:#58a6ff;font-weight:600}.header{position:fixed;left:256px;right:0;top:0;height:56px;background:rgba(22,27,34,.85);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 32px}.main{margin-left:256px;margin-top:56px;padding:32px}</style></head><body>
+<div class="sidebar"><div style="padding:24px;border-bottom:1px solid var(--brd)"><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:rgba(88,166,255,.15);border:1px solid rgba(88,166,255,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#58a6ff">SG</div><div><div style="font-size:15px;font-weight:800;color:#fff">SchemaGuard</div><div style="font-size:9px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase">Validation Console</div></div></div></div><nav style="flex:1;padding:12px"><div class="nav-link"><span style="width:20px;text-align:center">◈</span>Dashboard</div><div class="nav-link"><span style="width:20px;text-align:center">⬡</span>Validate</div><div class="nav-link"><span style="width:20px;text-align:center">⬡⬡</span>Batch</div><div class="nav-link active"><span style="width:20px;text-align:center">▦</span>Rules Library</div><div class="nav-link"><span style="width:20px;text-align:center">≡</span>Audit Trail</div><div class="nav-link"><span style="width:20px;text-align:center">◎</span>Use Cases</div></nav><div style="padding:16px;border-top:1px solid var(--brd)"><div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:6px">System Status</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Validation Engine</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Scoring Pipeline</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Drift Detection</div><div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-bottom:4px"><span style="width:6px;height:6px;border-radius:50%;background:#238636;flex-shrink:0"></span>Async Queue</div><div style="font-size:10px;color:rgba(139,148,158,.4);margin-top:8px">v0.3.0 · 2 domains · 10 rules</div></div></div><div class="header"><span style="font-size:11px;color:var(--mut)">SchemaGuard Console</span><div style="flex:1"></div><span style="font-size:11px;color:var(--mut);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#238636"></span>All Systems Operational</span></div>
+<div class="main">
+  <div style="margin-bottom:24px">
+    <h1 style="font-size:24px;font-weight:800;color:#fff">Rules Library</h1>
+    <p style="font-size:13px;color:var(--mut);margin-top:2px">10 semantic validation rules · click any rule to see why it matters</p>
+  </div>
+  <h2 style="font-size:14px;font-weight:600;color:#fff;margin-bottom:10px">🏥 Healthcare Intake</h2>
+  <div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">HC-001</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">age_matches_dates</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">patient_age, date_of_birth, admission_date</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">HC-002</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">admission_after_birth</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">date_of_birth, admission_date</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(88,166,255,.25);border-left:3px solid #58a6ff;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">HC-003</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">discharge_after_admission</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">admission_date, discharge_date</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▲</span>
+  </div>
+  <div style="padding:0 20px 14px"><div style="background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.12);border-radius:8px;padding:10px;margin-top:10px"><div style="font-size:10px;font-weight:600;color:#58a6ff;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">⚡ Why This Matters</div><p style="font-size:11px;color:rgba(173,186,199,.85);line-height:1.5">Negative length-of-stay is clinically impossible and breaks DRG calculation. UB-04 claims with LOS&lt;0 are rejected by all CMS-certified billing systems.</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><div style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:10px"><div style="font-size:10px;color:var(--mut);font-weight:600;margin-bottom:4px">Example violation</div><p style="font-size:10px;color:rgba(173,186,199,.65);font-family:monospace;line-height:1.4">admission: 2024-08-15<br>discharge: 2024-08-08<br>LOS = −7 days</p></div><div style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:10px"><div style="font-size:10px;color:var(--mut);font-weight:600;margin-bottom:4px">Regulatory reference</div><p style="font-size:10px;color:rgba(139,148,158,.7);font-style:italic;line-height:1.4">NUBC UB-04 FL6/FL16 · CMS CoP §482.24(c)(2)(vii)</p></div></div></div>
+</div><div style="background:var(--surf);border:1px solid rgba(210,153,34,.25);border-left:3px solid #d29922;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">HC-004</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">age_appropriate_diagnosis</span>
+        <span class="tag" style="background:rgba(210,153,34,.12);color:#e3b341;border:1px solid rgba(210,153,34,.3)">warning</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">patient_age, diagnosis_code</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(210,153,34,.25);border-left:3px solid #d29922;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">HC-005</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">medication_plausibility</span>
+        <span class="tag" style="background:rgba(210,153,34,.12);color:#e3b341;border:1px solid rgba(210,153,34,.3)">warning</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">diagnosis_code, medication</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div>
+  <h2 style="font-size:14px;font-weight:600;color:#fff;margin:20px 0 10px">💰 Financial Loan Application</h2>
+  <div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-001</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">approval_after_application</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">application_date, approval_date</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-002</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">loan_to_income_ratio</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">loan_amount, annual_income</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(210,153,34,.25);border-left:3px solid #d29922;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-003</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">debt_to_income_ratio</span>
+        <span class="tag" style="background:rgba(210,153,34,.12);color:#e3b341;border:1px solid rgba(210,153,34,.3)">warning</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">existing_debt, annual_income</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-004</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">employment_length_vs_age</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">employment_length_years, date_of_birth</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div><div style="background:var(--surf);border:1px solid rgba(218,54,51,.25);border-left:3px solid #da3633;border-radius:12px;overflow:hidden;margin-bottom:8px">
+  <div style="display:flex;align-items:start;gap:14px;padding:14px 20px">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="font-family:monospace;font-weight:700;font-size:13px;color:#fff">FN-005</span>
+        <span style="font-family:monospace;font-size:10px;color:var(--mut)">approved_within_requested</span>
+        <span class="tag" style="background:rgba(218,54,51,.12);color:#f85149;border:1px solid rgba(218,54,51,.3)">critical</span>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:4px">Fields: <span style="font-family:monospace;color:rgba(201,209,217,.65)">approved_amount, loan_amount</span></div>
+    </div>
+    <span style="color:var(--mut);font-size:11px;flex-shrink:0;margin-top:2px">▼</span>
+  </div>
+  
+</div>
+</div></body></html>
