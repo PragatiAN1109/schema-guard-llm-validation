@@ -1,5 +1,10 @@
-# render.yaml — deploys both backend and frontend from one repo
+# render.yaml — Blueprint for deploying SchemaGuard backend + frontend
 # Docs: https://render.com/docs/blueprint-spec
+#
+# IMPORTANT: After first deploy, go to schemaguard-api → Environment
+# and set ANTHROPIC_API_KEY to your real key from console.anthropic.com
+# Then go to schemaguard-ui → Environment and set:
+# NEXT_PUBLIC_API_URL = https://schemaguard-api.onrender.com
 
 services:
 
@@ -16,7 +21,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: ANTHROPIC_API_KEY
-        sync: false          # set this manually in Render dashboard — never commit keys
+        sync: false
       - key: CONFIDENCE_TRUSTED_THRESHOLD
         value: "0.85"
       - key: CONFIDENCE_QUARANTINE_THRESHOLD
@@ -44,7 +49,4 @@ services:
       - key: NODE_VERSION
         value: 20.18.0
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: schemaguard-api
-          property: host           # auto-filled with backend URL
+        sync: false
