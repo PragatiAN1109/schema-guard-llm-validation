@@ -1,0 +1,50 @@
+# render.yaml — deploys both backend and frontend from one repo
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+
+  # ── FastAPI Backend ────────────────────────────────────────────────────────
+  - type: web
+    name: schemaguard-api
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: ANTHROPIC_API_KEY
+        sync: false          # set this manually in Render dashboard — never commit keys
+      - key: CONFIDENCE_TRUSTED_THRESHOLD
+        value: "0.85"
+      - key: CONFIDENCE_QUARANTINE_THRESHOLD
+        value: "0.50"
+      - key: DRIFT_NUMERIC_THRESHOLD
+        value: "1.5"
+      - key: DRIFT_CATEGORICAL_THRESHOLD
+        value: "0.20"
+      - key: DRIFT_NULL_RATE_THRESHOLD
+        value: "0.15"
+      - key: DRIFT_VIOLATION_RATE_THRESHOLD
+        value: "0.10"
+    healthCheckPath: /health
+
+  # ── Next.js Frontend ───────────────────────────────────────────────────────
+  - type: web
+    name: schemaguard-ui
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: schemaguard-api
+          property: host           # auto-filled with backend URL
