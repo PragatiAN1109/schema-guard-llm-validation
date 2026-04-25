@@ -6,7 +6,7 @@
 
 **Author:** Pragati Narotam  
 **Course:** INFO 7375 — Prompt Engineering for Generative AI  
-**Institution:** Khoury College of Computer Sciences, Northeastern University  
+**Institution:** College of Engineering, Northeastern University  
 **Date:** April 2025  
 **Full report:** `docs/report/SchemaGuard_Report.md`  
 **Diagrams:** `outputs/diagrams/`
