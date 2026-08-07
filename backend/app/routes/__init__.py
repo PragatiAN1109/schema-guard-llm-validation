@@ -1,3 +1,0 @@
-"""
-SchemaGuard Backend — Routes Package
-"""

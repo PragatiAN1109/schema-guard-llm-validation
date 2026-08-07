@@ -1,3 +1,0 @@
-"""
-SchemaGuard Backend — App Package
-"""

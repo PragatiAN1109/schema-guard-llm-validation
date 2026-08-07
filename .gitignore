@@ -57,7 +57,7 @@ data/dataset_summary.csv
 
 # Temp / scratch files
 *.tmp
-demo/_tail_fix.tmp
+*.log
 
 # Node (frontend)
 node_modules/
@@ -69,5 +69,5 @@ frontend/.env.local
 htmlcov/
 .pytest_cache/
 
-# Plots — tracked so they render on GitHub
-# outputs/plots/*.png   ← uncomment to exclude from git
+# Generated evaluation plots (regenerate with: python outputs/generate_plots.py)
+outputs/plots/*.png

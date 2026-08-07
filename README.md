@@ -1,77 +1,40 @@
-<div align="center">
+# SchemaGuard
 
-<h1>SchemaGuard</h1>
+**Semantic validation, drift detection, and explainability for LLM-generated structured data.**
 
-<p><strong>Semantic Validation & Drift Detection for LLM-Generated Structured Outputs</strong></p>
+LLMs and document-extraction pipelines produce JSON that is structurally correct and still wrong. SchemaGuard adds a deterministic layer on top of schema validation — cross-field rules, confidence scoring, and decision routing — so a record has to make sense, not just parse.
 
-<p>
-  <a href="https://python.org"><img src="https://img.shields.io/badge/python-3.12-3776ab?style=flat-square&logo=python&logoColor=white"/></a>
-  <a href="https://fastapi.tiangolo.com"><img src="https://img.shields.io/badge/API-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/></a>
-  <a href="https://nextjs.org"><img src="https://img.shields.io/badge/UI-Next.js%2014-black?style=flat-square&logo=next.js"/></a>
-  <img src="https://img.shields.io/badge/tests-190%20passing-brightgreen?style=flat-square"/>
-  <img src="https://img.shields.io/badge/F1-1.0%20both%20domains-brightgreen?style=flat-square"/>
-  <img src="https://img.shields.io/badge/latency-0.09ms-blue?style=flat-square"/>
-  <a href="https://northeastern.edu"><img src="https://img.shields.io/badge/INFO%207375-Northeastern-d41b2c?style=flat-square"/></a>
+**JSON Schema validates structure. SchemaGuard validates meaning.**
+
+<p align="center">
+  <img src="./assets/architecture.svg" alt="SchemaGuard system architecture" width="100%">
 </p>
 
-<p><em>LLMs generate structurally valid JSON that is semantically wrong. SchemaGuard catches what schema validation misses.</em></p>
+## The problem
 
-</div>
-
----
-
-## The Problem
-
-When LLMs generate structured records, the output passes JSON Schema validation perfectly — but the data can be logically impossible:
-
-| Record | Violation | Passes JSON Schema? | Consequence |
-|--------|-----------|:---:|---|
-| Discharge 7 days **before** admission | `discharge_date < admission_date` | ✅ Yes | DRG miscalculation · UB-04 claim rejected |
-| Loan = **52×** annual income | `loan_amount / income = 52` | ✅ Yes | CFPB ATR violation · QM ineligible |
-| Age-related osteoporosis in a **5-year-old** | Adult-only ICD-10 code M81.0 | ✅ Yes | CMS NCCI edit failure |
-| Approved **22 days before** applying | `approval_date < application_date` | ✅ Yes | TILA-RESPA disclosure violation |
-
-Every one flows silently into production. **SchemaGuard stops them.**
-
----
-
-## System Architecture
-
-![System Architecture](outputs/diagrams/A_system_architecture.svg)
-
-### Pipeline Flow
-
-![Validation Pipeline](outputs/diagrams/B_validation_pipeline.svg)
-
----
-
-## Before vs After
-
-![Before vs After](outputs/diagrams/C_before_after.svg)
-
----
-
-## Quick Start
-
-```bash
-# 1. Clone and install
-git clone https://github.com/PragatiAN1109/schema-guard-llm-validation.git
-cd schema-guard-llm-validation
-pip install -r requirements.txt
-
-# 2. Set API key (required for RAG explanations)
-echo "ANTHROPIC_API_KEY=sk-ant-..." >> .env
-
-# 3. Start the API server
-./run_backend.sh
-# → http://localhost:8000/docs
-
-# 4. (Optional) Start the console UI
-cd frontend && node_modules/.bin/next dev --port 3000
-# → http://localhost:3000
+```json
+{
+  "admission_date": "2024-08-15",
+  "discharge_date": "2024-08-08"
+}
 ```
 
-**Validate a record in one curl:**
+Both fields are correctly-typed dates. JSON Schema passes this record. But the patient is discharged a week before being admitted — a logically impossible record that a type checker will never catch, and that flows silently into claims processing, billing, or analytics downstream.
+
+## How it works
+
+Every record — whether it arrives via the API, a batch upload, or document ingestion — runs through the same four-stage pipeline (`validator/pipeline.py`):
+
+1. **JSON Schema** checks shape and types against a Draft 7 schema for the domain.
+2. **Semantic rules** check the things a schema can't express — cross-field invariants like `discharge_date ≥ admission_date` or `loan_amount / annual_income ≤ 10×`.
+3. **Confidence scoring** starts at 1.0 and subtracts a fixed penalty per violation (critical −0.30, warning −0.12).
+4. **Decision routing** maps the score to `trusted` (≥ 0.85), `flagged` (0.50–0.84), or `quarantined` (< 0.50).
+
+Only *flagged* records go on to get an AI-generated explanation — the decision itself is already final by that point.
+
+<p align="center">
+  <img src="./assets/record-flow.svg" alt="One record traced through validation" width="100%">
+</p>
 
 ```bash
 curl -s -X POST http://localhost:8000/validate \
@@ -81,12 +44,11 @@ curl -s -X POST http://localhost:8000/validate \
     "record": {
       "patient_id": "P-4412", "first_name": "Sarah", "last_name": "Mitchell",
       "date_of_birth": "1990-01-20", "gender": "female",
-      "admission_date": "2024-08-15",
-      "discharge_date": "2024-08-08",
+      "admission_date": "2024-08-15", "discharge_date": "2024-08-08",
       "diagnosis_code": "N39.0", "medication": "Ciprofloxacin",
       "patient_age": 34, "emergency_admission": false
     }
-  }' | python3 -m json.tool
+  }'
 ```
 
 ```json
@@ -103,298 +65,156 @@ curl -s -X POST http://localhost:8000/validate \
 }
 ```
 
----
+**Healthcare Intake**
 
-## The 10 Semantic Rules
+| Rule | Cross-field check | Severity |
+|------|-------------------|:--------:|
+| HC-001 | `patient_age` matches computed age from DOB (±1 yr) | Critical |
+| HC-002 | `admission_date ≥ date_of_birth` | Critical |
+| HC-003 | `discharge_date ≥ admission_date` | Critical |
+| HC-004 | `diagnosis_code` is age-appropriate per ICD-10-CM edit table | Warning |
+| HC-005 | `medication` is plausible for the diagnosis category | Warning |
 
-![Violations Table](outputs/diagrams/D_violations_table.svg)
+**Financial Loan Application**
 
-### Healthcare Intake (HC-001 – HC-005)
+| Rule | Cross-field check | Severity |
+|------|-------------------|:--------:|
+| FN-001 | `approval_date ≥ application_date` (or null) | Critical |
+| FN-002 | `loan_amount / annual_income ≤ 10×` | Critical |
+| FN-003 | `existing_debt / annual_income ≤ 60%` | Warning |
+| FN-004 | `employment_length_years ≤ (age − 16)` | Critical |
+| FN-005 | `approved_amount ≤ loan_amount` (or null) | Critical |
 
-| Rule | Cross-Field Check | Severity | Regulatory Ref |
-|------|-------------------|:--------:|----------------|
-| HC-001 | `patient_age` matches computed age from DOB + admission date (±1 yr) | 🔴 Critical | CMS CoP §482.24(c) |
-| HC-002 | `admission_date ≥ date_of_birth` | 🔴 Critical | HL7 FHIR R4 Encounter |
-| HC-003 | `discharge_date ≥ admission_date` | 🔴 Critical | NUBC UB-04 FL6/FL16 |
-| HC-004 | `diagnosis_code` is age-appropriate per ICD-10-CM edit table | 🟡 Warning | ICD-10-CM FY2024 Guidelines |
-| HC-005 | `medication` is plausible for the diagnosis category | 🟡 Warning | ISMP Medication Safety Alert |
+## Engineering highlights
 
-### Financial Loan Application (FN-001 – FN-005)
+**Deterministic validation, isolated from the LLM path.** `validate_record()` runs the same four stages regardless of whether the request came from `/validate`, the async queue, or document ingestion. The Claude call in the RAG explainer happens strictly after this function returns — it receives an already-final decision and a list of violations, and cannot change either. This keeps validation reproducible: the same input always produces the same decision, with no model-call latency or non-determinism on the critical path.
 
-| Rule | Cross-Field Check | Severity | Regulatory Ref |
-|------|-------------------|:--------:|----------------|
-| FN-001 | `approval_date ≥ application_date` (or null) | 🔴 Critical | CFPB TRID §1026.19 |
-| FN-002 | `loan_amount / annual_income ≤ 10×` | 🔴 Critical | CFPB ATR Rule 12 CFR §1026.43 |
-| FN-003 | `existing_debt / annual_income ≤ 60%` | 🟡 Warning | Fannie Mae DU §B3-6-02 |
-| FN-004 | `employment_length_years ≤ (age − 16)` | 🔴 Critical | CFPB ATR §1026.43(c)(3) |
-| FN-005 | `approved_amount ≤ loan_amount` (or null) | 🔴 Critical | ECOA Regulation B §1002.9 |
+**Confidence is arithmetic, not a heuristic.** `1.0 − Σ(severity penalty)`, clamped to `[0, 1]`. Two people reading the code can hand-compute the score for any record; there's nothing to tune except the penalty table.
 
----
+**Explanations are retrieval-grounded, not free-form.** `/rag/explain` builds a query from the violated rule IDs, retrieves the top-k passages from a 14-document knowledge base via FAISS (`IndexFlatIP`, `all-MiniLM-L6-v2` embeddings), and passes only that retrieved text to Claude alongside the violation. The response includes the retrieved chunks and their sources, so the explanation can be checked against what it was actually grounded in.
 
-## Confidence Scoring
+**Drift is a batch-level signal, not a per-record one.** A single bad record is a validation failure. A population that quietly shifts — a data source that starts sending systematically older patients, or lower incomes — can stay individually "valid enough" to pass every rule while the underlying distribution moves. `POST /batch-validate` profiles each batch against a stored baseline on four independent signals (z-score for numeric fields, PSI for categorical fields, null-rate delta, violation-rate delta) specifically to catch that case.
 
-```
-score = 1.0 − 0.30 × |critical violations| − 0.12 × |warning violations|
-score = max(0.0, min(1.0, score))
-```
+**The async path reuses the sync pipeline.** `pipeline/async_processor.py` is an in-memory job queue with bounded concurrency (`asyncio.Semaphore(10)`) and retry-on-failure (up to 2 attempts before a job is marked failed) — but the actual validation call inside it is the same `validate_record()` function used by the synchronous endpoint. There is one pipeline, entered from three places (sync, async, document ingest).
 
-| Score | Decision | Example |
-|:-----:|----------|---------|
-| **1.00** | ✅ TRUSTED | 0 violations |
-| **0.88** | ✅ TRUSTED* | 1 warning (recorded, not blocked) |
-| **0.70** | ⚠️ FLAGGED | 1 critical |
-| **0.40** | ❌ QUARANTINED | 2 critical |
-| **0.10** | ❌ QUARANTINED | 3 critical (cascade) |
+**Document ingestion uses the LLM only for extraction.** `POST /ingest/upload` sends PDF/text content to Claude to extract structured fields, then runs the result through the identical validation pipeline as any other record. The model's role there is OCR-adjacent field extraction — it still doesn't get a vote on whether the extracted record is valid.
 
-*Warning violations are recorded in the audit log but do not block routing.*
+## RAG-grounded explanations
 
----
+Flagged and quarantined records get an explanation instead of just a rule ID. The retrieval corpus is domain reference material — CMS, HL7 FHIR, ICD-10-CM, CFPB, Regulation Z, ECOA, Fannie Mae guidance — chunked and embedded once (`python3 rag/vector_store.py --build`) into a FAISS index. At request time, `/rag/explain` retrieves the passages relevant to the specific violated rule and includes them in the prompt, so the explanation cites the same source a compliance reviewer would.
 
-## Evaluation Results
+## Drift detection
 
-### Confidence Score Distribution
+Rules operate on one record at a time and can't see the batch it came from. `drift/` builds a baseline profile per domain (mean/std for numeric fields, category frequencies, null rates, violation rates) and compares new batches against it whenever `/batch-validate` runs, flagging any of the four signals above that crosses its threshold.
 
-![Confidence Distribution](outputs/plots/03_confidence_histogram.png)
+## Evaluation
 
-### Rule Violation Frequency
-
-![Rule Violations](outputs/plots/05_rule_violation_frequency.png)
-
-### Decision Distribution
-
-![Decision Distribution](outputs/plots/06_decision_distribution.png)
-
-### Latency Distribution
-
-![Latency](outputs/plots/07_latency_distribution.png)
-
-### Adversarial Robustness
-
-![Adversarial Boundary](outputs/plots/14_adversarial_boundary.png)
-
-### Drift Detection Signals
-
-![Drift Detection](outputs/plots/09_drift_signals.png)
-
-### RAG vs Baseline Explanation Quality
-
-![RAG Comparison](outputs/plots/rag_comparison.png)
-
-### Summary Dashboard
-
-![Summary Dashboard](outputs/plots/12_summary_dashboard.png)
-
----
-
-## Key Metrics
+Numbers below come from running the test suites and reading `evaluation/results/*.json` directly — not from documentation that predates the code.
 
 | Metric | Result |
 |--------|--------|
-| Precision / Recall / F1 | **1.0 / 1.0 / 1.0** on both domains |
-| False quarantine rate | **0%** — no valid record ever blocked |
-| Median validation latency | **0.09 ms** |
-| Throughput | **~3,800 records / second** |
-| Adversarial tests | **53 / 53 passed** (noise · boundary · compound) |
-| Drift shifts detected | **6 / 6** with **0 / 2 false alarms** |
-| RAG explanation quality | **6.0 / 6** vs 2.7 / 6 template baseline |
-| Integration tests | **58 / 58** passing |
-| Production tests | **79 / 79** passing |
-| Adversarial tests | **53 / 53** passing |
-| **Total tests** | **190 / 190** passing |
+| Total tests | **190 / 190** passing (58 integration + 79 production + 53 adversarial) |
+| Precision / Recall / F1 | 1.0 / 1.0 / 1.0 on both domains |
+| False quarantine rate | 0% — no valid record incorrectly blocked |
+| Median validation latency | ~0.09 ms |
+| Throughput | ~3,800 records/sec (single process) |
+| Drift scenarios detected | 6 / 6, with 0 / 2 false alarms on stable batches |
 
-> **On F1 = 1.0:** SchemaGuard is a deterministic rule engine, not a probabilistic model. F1 = 1.0 confirms correct rule implementation — the same way an `if` statement always gets the right answer on data designed to trigger it. The meaningful robustness evidence is the adversarial suite: 53 edge cases, noise injection, exact boundary probing, and compound violations — all correct, zero crashes, zero false quarantines.
-
----
-
-## Adversarial Test Results
-
-| Suite | Cases | What it tests | Result |
-|-------|:-----:|---------------|:------:|
-| **A — Noise** | 25 | Type errors, null fields, unicode, malformed dates | 25/25 ✅ |
-| **B — Boundaries** | 20 | Exact threshold tests for all 10 rules (on-edge and just-over) | 20/20 ✅ |
-| **C — Compound** | 8 | 2–4 simultaneous violations, cascade scoring | 8/8 ✅ |
-
----
-
-## Drift Detection Results
-
-| Shift Scenario | Domain | Signal | Detected |
-|----------------|--------|--------|:--------:|
-| Patient age +26 years | HC | z-score 1.73σ | ✅ |
-| Diagnosis mix → chronic | HC | PSI = 0.88 | ✅ |
-| 40% null surge | HC | null-rate Δ | ✅ |
-| Income −55% | FN | z-score 1.78σ | ✅ |
-| Credit score −130 pts | FN | z-score 2.48σ | ✅ |
-| 35% null surge | FN | null-rate Δ | ✅ |
-| Stable batch × 2 | Both | — | ✗ (0 false alarms) |
-
----
-
-## Features
-
-| Feature | Description | Endpoint |
-|---------|-------------|----------|
-| **Single validation** | Structural + semantic + confidence + routing | `POST /validate` |
-| **Batch validation** | N records + drift detection | `POST /batch-validate` |
-| **Correction suggestions** | Auto-fix + probable + manual tiers | `POST /suggest/suggest-fix` |
-| **Async pipeline** | Job queue with retry + dead-letter | `POST /async/submit` |
-| **RAG explanations** | Regulation-grounded failure explanations | `POST /rag/explain` |
-| **Document ingest** | Upload PDF/text → extract JSON → validate | `POST /ingest/upload` |
-| **Drift detection** | z-score + PSI + null-rate + violation-rate | Included in batch |
-| **Audit trail** | Full JSONL history with confidence scores | `GET /user/audit` |
-
----
-
-## vs Existing Tools
-
-| Capability | JSON Schema | Great Expectations | LLM-as-Judge | **SchemaGuard** |
-|------------|:-----------:|:------------------:|:------------:|:---------------:|
-| Cross-field semantic rules | ✗ | Partial | Partial | ✅ |
-| Fully deterministic | ✅ | ✅ | ✗ | ✅ |
-| Per-record real-time | ✅ | Partial | Slow (~10s) | ✅ |
-| Confidence score | ✗ | ✗ | Partial | ✅ |
-| Machine-readable audit trail | ✅ | ✅ | ✗ | ✅ |
-| Regulatory-grounded explanation | ✗ | ✗ | Partial | ✅ |
-| Population drift detection | ✗ | Partial | ✗ | ✅ |
-| Latency | <1ms | Batch | 1–10s | **0.09ms** |
-
----
-
-## Project Structure
-
-```
-schema-guard-llm-validation/
-├── api/                FastAPI application (5 routers: validate, suggest, RAG, ingest, async)
-├── validator/          Core pipeline: structural → semantic → scoring → routing
-├── rules/              Rule registry + 10 decorated rule functions
-├── schemas/            JSON Schema Draft 7 for both domains
-├── scoring/            Confidence scorer + decision router
-├── suggestions/        Correction suggestion engine (definite/probable/manual tiers)
-├── drift/              Baseline profiler + 4-signal drift detector
-├── rag/                FAISS vector store + RAG explainer + knowledge base (11 docs)
-├── ingest/             Document upload → LLM extraction → validation
-├── frontend/           Next.js 14 console UI (6 pages: validate/batch/rules/audit/usecases/dashboard)
-├── data_gen/           Synthetic dataset generator (600 records, quality-gated)
-│   └── sample_data/    16 seed records (valid + invalid + edge cases) for demo
-├── evaluation/         Tests (190 assertions) + charts + metrics JSON
-├── notebooks/          6 Jupyter notebooks (all 6 executed)
-├── outputs/
-│   ├── plots/          30 evaluation charts
-│   ├── diagrams/       4 SVG architecture diagrams
-│   └── screenshots/    4 UI screenshots
-├── docs/report/        Academic report (SchemaGuard_Report.md, 880 lines)
-└── audit_logs/         JSONL validation history
-```
-
----
-
-## Running the Application
-
-### Option A — Console UI + Backend (recommended)
+F1 = 1.0 reflects a deterministic engine scored against data written to exercise its own rules — it confirms correct implementation, not generalization to unseen distributions. The adversarial suite (25 noise-injection cases, 20 exact-boundary probes, 8 compound-violation cases) is the more meaningful check: 53/53 handled correctly with no crashes and no false quarantines.
 
 ```bash
-# Terminal 1: Backend
-./run_backend.sh
-# → http://localhost:8000
+python3 -m evaluation.integration_test        # 58 assertions
+python3 -m evaluation.production_test         # 79 assertions
+python3 -m evaluation.adversarial_evaluation  # 53 assertions
+python3 -m pytest evaluation/                 # pytest-discoverable subset
+```
 
-# Terminal 2: Next.js UI
-cd frontend && node_modules/.bin/next dev --port 3000
+## Tech stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Python 3.12 |
+| API | FastAPI, Pydantic v2, Uvicorn |
+| Frontend | Next.js 14, React 18, Tailwind CSS |
+| LLM | Anthropic Claude |
+| Vector store | FAISS (`IndexFlatIP`, cosine similarity) |
+| Embeddings | `sentence-transformers` (`all-MiniLM-L6-v2`) |
+| Schema validation | `jsonschema` (Draft 7) |
+| Testing | pytest + custom assertion-based evaluation runners |
+
+## API
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/health` | Service status |
+| `GET` | `/example` | Sample record for a domain |
+| `POST` | `/validate` | Single record validation |
+| `POST` | `/batch-validate` | Batch validation + drift detection |
+| `POST` | `/suggest/suggest-fix` | Field-level correction suggestions |
+| `GET` | `/suggest/suggest-fix/rules` | Rules with suggestion support |
+| `POST` | `/rag/explain` | Validate + RAG-grounded explanation |
+| `GET` | `/rag/status` | Check whether the FAISS index is built |
+| `POST` | `/rag/search` | Search the knowledge base directly |
+| `POST` | `/ingest/upload` | Upload PDF/text → extract → validate |
+| `GET` | `/ingest/supported-domains` | List supported domains and file types |
+| `POST` | `/async/submit` | Submit an async validation job |
+| `GET` | `/async/result/{job_id}` | Fetch an async job's result |
+| `GET` | `/user/audit` | Per-user audit log |
+
+Full interactive docs at `http://localhost:8000/docs`.
+
+## Run locally
+
+```bash
+git clone https://github.com/PragatiAN1109/schema-guard-llm-validation.git
+cd schema-guard-llm-validation
+
+# Backend
+pip install -r requirements.txt
+cp .env.example .env   # add ANTHROPIC_API_KEY for RAG explanations & document ingest
+./run_backend.sh
+# → http://localhost:8000/docs
+
+# Frontend (separate terminal)
+cd frontend
+npm install
+npm run dev
 # → http://localhost:3000
 ```
 
-### Option B — Streamlit UI
-
-```bash
-./run_ui.sh
-# → http://localhost:8501
-```
-
-### Run all tests
-
-```bash
-python3 -m evaluation.integration_test    # 58 assertions
-python3 -m evaluation.production_test     # 79 assertions
-python3 -m evaluation.adversarial_evaluation  # 53 assertions
-```
-
-### Build RAG index (one-time, ~10 seconds)
+Build the RAG index once before using `/rag/explain`:
 
 ```bash
 python3 rag/vector_store.py --build
 ```
 
----
+Deployment is defined in [`render.yaml`](render.yaml) — FastAPI backend and Next.js frontend as two Render web services.
 
-## API Reference
+## Project structure
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/health` | Service status |
-| `POST` | `/validate` | Single record validation |
-| `POST` | `/batch-validate` | Batch + drift detection |
-| `POST` | `/suggest/suggest-fix` | Correction suggestions |
-| `GET` | `/suggest/suggest-fix/rules` | List rules with suggestion support |
-| `POST` | `/rag/explain` | Validate + RAG explanation |
-| `POST` | `/ingest/upload` | Upload PDF → extract → validate |
-| `POST` | `/async/submit` | Submit async job |
-| `GET` | `/async/result/{id}` | Get job result |
-| `GET` | `/user/audit` | Audit log |
+```
+schema-guard-llm-validation/
+├── api/            FastAPI app: validate, async, user, RAG, ingest, suggest routers
+├── validator/      Core pipeline — structural → semantic → scoring → routing
+├── rules/          Rule registry + the 10 cross-field rule functions
+├── schemas/        JSON Schema (Draft 7) for both domains
+├── scoring/        Confidence scorer + decision router
+├── suggestions/    Correction suggestion engine
+├── drift/          Baseline profiling + 4-signal drift detector
+├── rag/            FAISS vector store, chunker, and RAG explainer
+├── ingest/         Document upload → Claude extraction → validation
+├── pipeline/       Async job queue and processor
+├── auth/           Token-based API authentication
+├── analytics/      Usage tracking and audit logging
+├── frontend/       Next.js 14 console UI
+├── data_gen/       Synthetic dataset generator for both domains
+└── evaluation/     Test suites, metrics, and evaluation artifacts
+```
 
-Full interactive docs at **http://localhost:8000/docs**
+## Design principle
 
----
-
-## Notebooks
-
-| Notebook | Topic | Status |
-|----------|-------|:------:|
-| `01_prompt_engineering.ipynb` | Prompt template design, v1→v3 iteration | ✅ Executed |
-| `02_validation_pipeline.ipynb` | 4-stage pipeline walkthrough | ✅ Executed |
-| `03_evaluation_metrics.ipynb` | All evaluation charts + metrics tables | ✅ Executed |
-| `04_drift_detection.ipynb` | Baseline profiling, drift scenarios | ✅ Executed |
-| `05_synthetic_data_generation.ipynb` | Dataset generator walkthrough | ✅ Executed |
-| `06_rag_explanations.ipynb` | FAISS demo, baseline vs RAG comparison | ✅ Executed |
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Language | Python 3.12 |
-| API | FastAPI + Pydantic v2 + Uvicorn |
-| Frontend | Next.js 14 · React 18 · Tailwind CSS |
-| LLM | Claude claude-opus-4-5 (Anthropic) |
-| Vector store | FAISS IndexFlatIP (cosine, 384-dim) |
-| Embeddings | `all-MiniLM-L6-v2` (sentence-transformers) |
-| Schema validation | jsonschema Draft 7 |
-| Drift detection | z-score · PSI · null-rate · violation-rate |
-| Auth | Token-based (demo key: `sg-key-demo-000`) |
-
----
-
-## Troubleshooting
-
-| Problem | Fix |
-|---------|-----|
-| `permission denied: ./run_backend.sh` | `chmod +x run_backend.sh run_ui.sh` |
-| `externally-managed-environment` pip error | Add `--break-system-packages` flag |
-| Frontend shows blank page | Start backend first on port 8000 |
-| Port 8000 in use | `lsof -ti:8000 \| xargs kill -9` |
-
----
+The rule engine decides. The model explains. Keeping those two jobs on opposite sides of a function boundary is what makes the decision reproducible, testable, and auditable — and it's the only reason the explanation layer is allowed to be as flexible as an LLM.
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
-
----
-
-<div align="center">
-<p><strong>SchemaGuard</strong> · Pragati Narotam · INFO 7375 Prompt Engineering for GenAI · Northeastern University · 2025</p>
-<p>
-  <a href="docs/report/SchemaGuard_Report.md">📄 Academic Report</a> ·
-  <a href="DEMO_INSTRUCTIONS.md">🚀 Demo Instructions</a> ·
-  <a href="http://localhost:8000/docs">📡 API Docs</a>
-</p>
-</div>
+MIT — see [LICENSE](LICENSE).
