@@ -1,0 +1,128 @@
+<svg viewBox="0 0 1300 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title{font:700 20px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .subtitle{font:400 12px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .kicker{font:700 10px Inter,Helvetica,Arial,sans-serif;letter-spacing:.6px;fill:#94A3B8}
+      .cardtitle{font:700 14px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .cardbig{font:800 20px Inter,Helvetica,Arial,sans-serif}
+      .cardsub{font:400 10px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .status{font:700 11px Inter,Helvetica,Arial,sans-serif}
+      .mono{font:400 10.5px ui-monospace,Menlo,Consolas,monospace;fill:#64748B}
+      .monoval{font:700 13px ui-monospace,Menlo,Consolas,monospace;fill:#0F172A}
+      .footnote{font:400 9.5px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8}
+      .punchline{font:600 10.5px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8;font-style:italic}
+    </style>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+
+    <symbol id="r-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2.5h9l3 3v16H6z"/><path d="M15 2.5v3h3"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
+    </g></symbol>
+    <symbol id="r-schema" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 3.5H5.5v17h3"/><path d="M15.5 3.5h3v17h-3"/>
+      <circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="r-checklist" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="3" width="16" height="18" rx="2.5"/><line x1="7.3" y1="9" x2="16.7" y2="9"/><line x1="7.3" y1="15.3" x2="16.7" y2="15.3"/>
+    </g></symbol>
+    <symbol id="r-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 2.5 20h19z"/><line x1="12" y1="10" x2="12" y2="15"/><circle cx="12" cy="17.3" r="0.8" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="r-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 16.5a8 8 0 0 1 16 0"/><line x1="12" y1="16.5" x2="16" y2="10.5"/><circle cx="12" cy="16.5" r="1.3" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="r-flag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4.5h12l-3 3.5 3 3.5H6"/>
+    </g></symbol>
+    <symbol id="r-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12.5l4.5 4.5L19 7"/>
+    </g></symbol>
+    <symbol id="r-cross" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+    </g></symbol>
+  </defs>
+
+  <rect x="0" y="0" width="1300" height="300" fill="#ffffff"/>
+
+  <text x="40" y="30" class="title">One Record, Traced</text>
+  <text x="40" y="48" class="subtitle">A record with correct types and correct field shapes — that is still semantically wrong.</text>
+
+  <!-- connecting arrows (drawn first, under cards) -->
+  <path d="M223 175 H247" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow2)"/>
+  <path d="M430 175 H454" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow2)"/>
+  <path d="M637 175 H661" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow2)"/>
+  <path d="M844 175 H868" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow2)"/>
+  <path d="M1051 175 H1075" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow2)"/>
+  <text x="235" y="70" text-anchor="middle" class="punchline">valid ≠ correct</text>
+
+  <!-- Card 1: Input record -->
+  <g>
+    <rect x="40" y="80" width="183" height="190" rx="12" fill="#ffffff" stroke="#E2E8F0"/>
+    <text x="58" y="104" class="kicker">INPUT RECORD</text>
+    <g color="#64748B" transform="translate(58,114)"><use href="#r-doc" width="20" height="20"/></g>
+    <text x="58" y="163" class="mono">admission_date</text>
+    <text x="58" y="180" class="monoval">2024-08-15</text>
+    <text x="58" y="207" class="mono">discharge_date</text>
+    <text x="58" y="224" class="monoval">2024-08-08</text>
+    <text x="58" y="256" class="footnote">domain: healthcare_intake</text>
+  </g>
+
+  <!-- Card 2: JSON Schema -->
+  <g>
+    <rect x="247" y="80" width="183" height="190" rx="12" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="338.5" cy="120" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(326.5,108)"><use href="#r-schema" width="24" height="24"/></g>
+    <text x="338.5" y="160" text-anchor="middle" class="cardtitle">JSON Schema</text>
+    <g color="#059669" transform="translate(298.5,171)"><use href="#r-check" width="16" height="16"/></g>
+    <text x="322.5" y="184" class="status" fill="#059669">Structurally valid</text>
+    <text x="338.5" y="206" text-anchor="middle" class="cardsub">types + required fields OK</text>
+    <text x="338.5" y="220" text-anchor="middle" class="cardsub">both dates well-formed</text>
+  </g>
+
+  <!-- Card 3: Semantic Rule -->
+  <g>
+    <rect x="454" y="80" width="183" height="190" rx="12" fill="#ffffff" stroke="#FECACA"/>
+    <circle cx="545.5" cy="120" r="19" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <g color="#B91C1C" transform="translate(533.5,108)"><use href="#r-checklist" width="24" height="24"/></g>
+    <text x="545.5" y="160" text-anchor="middle" class="cardtitle">Rule HC-003</text>
+    <g color="#B91C1C" transform="translate(507.5,171)"><use href="#r-cross" width="16" height="16"/></g>
+    <text x="531.5" y="184" class="status" fill="#B91C1C">Violated</text>
+    <text x="545.5" y="206" text-anchor="middle" class="cardsub">discharge_date precedes</text>
+    <text x="545.5" y="220" text-anchor="middle" class="cardsub">admission_date</text>
+  </g>
+
+  <!-- Card 4: Severity -->
+  <g>
+    <rect x="661" y="80" width="183" height="190" rx="12" fill="#ffffff" stroke="#FDE68A"/>
+    <circle cx="752.5" cy="120" r="19" fill="#FFFBEB" stroke="#FCD34D"/>
+    <g color="#B45309" transform="translate(740.5,108)"><use href="#r-alert" width="24" height="24"/></g>
+    <text x="752.5" y="166" text-anchor="middle" class="cardbig" fill="#B45309">CRITICAL</text>
+    <text x="752.5" y="184" text-anchor="middle" class="cardsub">severity of HC-003</text>
+    <text x="752.5" y="206" text-anchor="middle" class="cardsub">confidence penalty</text>
+    <text x="752.5" y="220" text-anchor="middle" class="cardsub">−0.30</text>
+  </g>
+
+  <!-- Card 5: Confidence -->
+  <g>
+    <rect x="868" y="80" width="183" height="190" rx="12" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="959.5" cy="120" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(947.5,108)"><use href="#r-gauge" width="24" height="24"/></g>
+    <text x="959.5" y="168" text-anchor="middle" class="cardbig" fill="#3730A3">0.70</text>
+    <text x="959.5" y="186" text-anchor="middle" class="cardsub">1.0 − 0.30</text>
+    <text x="959.5" y="206" text-anchor="middle" class="cardsub">severity-weighted</text>
+    <text x="959.5" y="220" text-anchor="middle" class="cardsub">confidence score</text>
+  </g>
+
+  <!-- Card 6: Decision -->
+  <g>
+    <rect x="1075" y="80" width="183" height="190" rx="12" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.4"/>
+    <circle cx="1166.5" cy="120" r="19" fill="#ffffff" stroke="#F59E0B"/>
+    <g color="#B45309" transform="translate(1154.5,108)"><use href="#r-flag" width="24" height="24"/></g>
+    <text x="1166.5" y="168" text-anchor="middle" class="cardbig" fill="#92400E">FLAGGED</text>
+    <text x="1166.5" y="186" text-anchor="middle" class="cardsub">0.50 – 0.84</text>
+    <text x="1166.5" y="206" text-anchor="middle" class="cardsub">explanation generated</text>
+    <text x="1166.5" y="220" text-anchor="middle" class="cardsub">via RAG + Claude</text>
+  </g>
+</svg>

@@ -1,0 +1,343 @@
+<svg viewBox="0 0 1400 580" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title{font:700 24px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .subtitle{font:400 12.5px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .grouplabel{font:700 12px Inter,Helvetica,Arial,sans-serif;letter-spacing:.4px}
+      .groupcaption{font:400 10px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8}
+      .cardtitle{font:700 13.5px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .cardsub{font:400 10.5px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .cardfact{font:700 9.5px Inter,Helvetica,Arial,sans-serif;fill:#3730A3}
+      .inputtitle{font:700 12.5px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .inputsub{font:400 10px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .gwtitle{font:700 15px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .gwrole{font:400 11px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+      .gwline{font:400 10.5px Inter,Helvetica,Arial,sans-serif;fill:#475569}
+      .pilltitle{font:700 13.5px Inter,Helvetica,Arial,sans-serif}
+      .pillsub{font:400 10px Inter,Helvetica,Arial,sans-serif;fill:#475569}
+      .chipname{font:700 10px Inter,Helvetica,Arial,sans-serif;fill:#334155}
+      .chipsub{font:400 8px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8}
+      .listtext{font:600 11px Inter,Helvetica,Arial,sans-serif;fill:#334155}
+      .liststrong{font:700 11px Inter,Helvetica,Arial,sans-serif;fill:#334155}
+      .connlabel{font:400 9.5px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8}
+      .platformlabel{font:700 9.5px Inter,Helvetica,Arial,sans-serif;fill:#94A3B8;letter-spacing:1px}
+      .platformtitle{font:700 12.5px Inter,Helvetica,Arial,sans-serif;fill:#0F172A}
+      .platformsub{font:400 9.5px Inter,Helvetica,Arial,sans-serif;fill:#64748B}
+    </style>
+
+    <marker id="arrowSlate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowIndigo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4F46E5"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8B5CF6"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94A3B8"/>
+    </marker>
+
+    <!-- icons, 24x24 stroke-based -->
+    <symbol id="i-api" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 3c-2 0-3 1-3 3v3c0 1-1 2-2 2 1 0 2 1 2 2v3c0 2 1 3 3 3"/>
+      <path d="M15 3c2 0 3 1 3 3v3c0 1 1 2 2 2-1 0-2 1-2 2v3c0 2-1 3-3 3"/>
+    </g></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2.5h9l3 3v16H6z"/><path d="M15 2.5v3h3"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
+    </g></symbol>
+    <symbol id="i-browser" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2"/><line x1="2.5" y1="8.5" x2="21.5" y2="8.5"/>
+      <circle cx="5.5" cy="6.5" r="0.55" fill="currentColor" stroke="none"/><circle cx="7.5" cy="6.5" r="0.55" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor"/></symbol>
+    <symbol id="i-schema" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 3.5H5.5v17h3"/><path d="M15.5 3.5h3v17h-3"/>
+      <circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="i-checklist" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M7.3 9l1.4 1.4L11.5 7"/><path d="M7.3 15.3l1.4 1.4 2.8-3.4"/><line x1="13.5" y1="9" x2="17" y2="9"/><line x1="13.5" y1="15.3" x2="17" y2="15.3"/>
+    </g></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 16.5a8 8 0 0 1 16 0"/><line x1="12" y1="16.5" x2="16" y2="10.5"/><circle cx="12" cy="16.5" r="1.3" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="i-fork" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="4" x2="12" y2="12"/><line x1="12" y1="12" x2="6.5" y2="20"/><line x1="12" y1="12" x2="12" y2="20"/><line x1="12" y1="12" x2="17.5" y2="20"/>
+    </g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.8 2.8L16.5 9"/>
+    </g></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4.5h12l-3 3.5 3 3.5H6"/>
+    </g></symbol>
+    <symbol id="i-block" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5"/><line x1="6.5" y1="6.5" x2="17.5" y2="17.5"/>
+    </g></symbol>
+    <symbol id="i-hist" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="20" x2="20" y2="20"/><rect x="5.5" y="13" width="3.2" height="7"/><rect x="10.5" y="7.5" width="3.2" height="12.5"/><rect x="15.5" y="15" width="3.2" height="5"/>
+    </g></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 2.5 20h19z"/><line x1="12" y1="10" x2="12" y2="15"/><circle cx="12" cy="17.3" r="0.8" fill="currentColor" stroke="none"/>
+    </g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10.2" cy="10.2" r="6.2"/><line x1="14.8" y1="14.8" x2="20.5" y2="20.5"/>
+    </g></symbol>
+    <symbol id="i-vector" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="1.3">
+      <line x1="6" y1="6" x2="12" y2="12"/><line x1="17.5" y1="5.5" x2="12" y2="12"/><line x1="6" y1="18" x2="12" y2="12"/><line x1="18" y1="17" x2="12" y2="12"/>
+      <circle cx="6" cy="6" r="1.5" fill="currentColor"/><circle cx="17.5" cy="5.5" r="1.5" fill="currentColor"/>
+      <circle cx="6" cy="18" r="1.5" fill="currentColor"/><circle cx="18" cy="17" r="1.5" fill="currentColor"/>
+      <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+    </g></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 5.5c2-1.2 5-1.2 7.2 0v13.5c-2.2-1.2-5.2-1.2-7.2 0z"/><path d="M20 5.5c-2-1.2-5-1.2-7.2 0v13.5c2.2-1.2 5.2-1.2 7.2 0z"/>
+    </g></symbol>
+    <symbol id="i-asterisk" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+      <line x1="12" y1="4.5" x2="12" y2="9.5"/>
+      <line x1="12" y1="4.5" x2="12" y2="9.5" transform="rotate(60 12 12)"/>
+      <line x1="12" y1="4.5" x2="12" y2="9.5" transform="rotate(120 12 12)"/>
+      <line x1="12" y1="4.5" x2="12" y2="9.5" transform="rotate(180 12 12)"/>
+      <line x1="12" y1="4.5" x2="12" y2="9.5" transform="rotate(240 12 12)"/>
+      <line x1="12" y1="4.5" x2="12" y2="9.5" transform="rotate(300 12 12)"/>
+    </g></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="7.2" cy="16.8" r="3.4"/><line x1="9.6" y1="14.4" x2="19" y2="5"/><line x1="14.7" y1="9.3" x2="17.2" y2="6.8"/>
+    </g></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5.5" rx="7" ry="2.4"/><path d="M5 5.5v13c0 1.3 3.1 2.4 7 2.4s7-1.1 7-2.4v-13"/><path d="M5 12.3c0 1.3 3.1 2.4 7 2.4s7-1.1 7-2.4"/>
+    </g></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+      <circle cx="4" cy="6" r="0.9" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="0.9" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="0.9" fill="currentColor" stroke="none"/>
+    </g></symbol>
+  </defs>
+
+  <rect x="0" y="0" width="1400" height="580" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="40" y="30" class="title">System Architecture</text>
+  <text x="40" y="50" class="subtitle">Deterministic rules decide the outcome. AI is called only to explain a decision that already exists.</text>
+
+  <!-- ============ INPUTS ============ -->
+  <g>
+    <rect x="40" y="76" width="170" height="54" rx="10" fill="#ffffff" stroke="#E2E8F0"/>
+    <g color="#334155" transform="translate(54,89)"><use href="#i-api" width="26" height="26"/></g>
+    <text x="88" y="99" class="inputtitle">REST API · JSON</text>
+    <text x="88" y="114" class="inputsub">Structured record</text>
+
+    <rect x="40" y="138" width="170" height="54" rx="10" fill="#ffffff" stroke="#E2E8F0"/>
+    <g color="#334155" transform="translate(54,151)"><use href="#i-doc" width="26" height="26"/></g>
+    <text x="88" y="161" class="inputtitle">PDF / Text Document</text>
+    <text x="88" y="176" class="inputsub">→ Claude extraction</text>
+
+    <rect x="40" y="200" width="170" height="54" rx="10" fill="#ffffff" stroke="#E2E8F0"/>
+    <g color="#334155" transform="translate(54,213)"><use href="#i-browser" width="26" height="26"/></g>
+    <text x="88" y="223" class="inputtitle">Next.js Frontend</text>
+    <text x="88" y="238" class="inputsub">Browser client</text>
+  </g>
+
+  <!-- input -> gateway connectors -->
+  <path d="M210 103 H225 V184 H230" fill="none" stroke="#94A3B8" stroke-width="1.4"/>
+  <path d="M210 165 H222 V184 H230" fill="none" stroke="#94A3B8" stroke-width="1.4"/>
+  <path d="M210 227 H225 V184 H230" fill="none" stroke="#94A3B8" stroke-width="1.4" marker-end="url(#arrowSlate)"/>
+
+  <!-- ============ GATEWAY ============ -->
+  <g>
+    <rect x="230" y="98" width="200" height="172" rx="12" fill="#ffffff" stroke="#CBD5E1" stroke-width="1.3"/>
+    <circle cx="330" cy="130" r="20" fill="#ECFEFF" stroke="#67E8F9"/>
+    <g color="#0E7490" transform="translate(318,118)"><use href="#i-bolt" width="24" height="24"/></g>
+    <text x="330" y="166" text-anchor="middle" class="gwtitle">FastAPI</text>
+    <text x="330" y="182" text-anchor="middle" class="gwrole">API + orchestration</text>
+    <line x1="246" y1="194" x2="414" y2="194" stroke="#E2E8F0"/>
+    <text x="246" y="212" class="gwline">Bearer token auth</text>
+    <text x="246" y="228" class="gwline">Per-user rate quotas</text>
+    <text x="246" y="244" class="gwline">6 routers · CORS enabled</text>
+  </g>
+
+  <!-- gateway -> schema -->
+  <path d="M430 184 H468" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrowSlate)"/>
+
+  <!-- ============ DETERMINISTIC VALIDATION GROUP ============ -->
+  <g>
+    <rect x="450" y="64" width="650" height="216" rx="14" fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1.3"/>
+    <text x="470" y="84" class="grouplabel" fill="#4338CA">DETERMINISTIC VALIDATION</text>
+    <text x="470" y="98" class="groupcaption">same pipeline for sync, async, and document-ingest requests</text>
+  </g>
+
+  <!-- stage cards template: x,139,150 at y=109 -->
+  <!-- Schema -->
+  <g>
+    <rect x="468" y="109" width="139" height="150" rx="10" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="537.5" cy="143" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(525.5,131)"><use href="#i-schema" width="24" height="24"/></g>
+    <text x="537.5" y="181" text-anchor="middle" class="cardtitle">JSON Schema</text>
+    <text x="537.5" y="199" text-anchor="middle" class="cardsub">Shape + type checks</text>
+    <rect x="476" y="217" width="123" height="20" rx="10" fill="#EEF2FF"/>
+    <text x="537.5" y="230.5" text-anchor="middle" class="cardfact">Draft 7 · 2 domains</text>
+  </g>
+  <!-- Rules -->
+  <g>
+    <rect x="625" y="109" width="139" height="150" rx="10" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="694.5" cy="143" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(682.5,131)"><use href="#i-checklist" width="24" height="24"/></g>
+    <text x="694.5" y="181" text-anchor="middle" class="cardtitle">Semantic Rules</text>
+    <text x="694.5" y="199" text-anchor="middle" class="cardsub">Cross-field invariants</text>
+    <rect x="633" y="217" width="123" height="20" rx="10" fill="#EEF2FF"/>
+    <text x="694.5" y="230.5" text-anchor="middle" class="cardfact">10 rules · 2 domains</text>
+  </g>
+  <!-- Confidence -->
+  <g>
+    <rect x="782" y="109" width="139" height="150" rx="10" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="851.5" cy="143" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(839.5,131)"><use href="#i-gauge" width="24" height="24"/></g>
+    <text x="851.5" y="181" text-anchor="middle" class="cardtitle">Confidence</text>
+    <text x="851.5" y="199" text-anchor="middle" class="cardsub">Severity-weighted score</text>
+    <rect x="790" y="217" width="123" height="20" rx="10" fill="#EEF2FF"/>
+    <text x="851.5" y="230.5" text-anchor="middle" class="cardfact">1.0 − Σ penalties</text>
+  </g>
+  <!-- Router -->
+  <g>
+    <rect x="939" y="109" width="139" height="150" rx="10" fill="#ffffff" stroke="#C7D2FE"/>
+    <circle cx="1008.5" cy="143" r="19" fill="#EEF2FF" stroke="#A5B4FC"/>
+    <g color="#4338CA" transform="translate(996.5,131)"><use href="#i-fork" width="24" height="24"/></g>
+    <text x="1008.5" y="181" text-anchor="middle" class="cardtitle">Decision Router</text>
+    <text x="1008.5" y="199" text-anchor="middle" class="cardsub">Threshold-based routing</text>
+    <rect x="947" y="217" width="123" height="20" rx="10" fill="#EEF2FF"/>
+    <text x="1008.5" y="230.5" text-anchor="middle" class="cardfact">3-way outcome</text>
+  </g>
+
+  <!-- internal pipeline arrows -->
+  <path d="M607 184 H625" fill="none" stroke="#4F46E5" stroke-width="1.6" marker-end="url(#arrowIndigo)"/>
+  <path d="M764 184 H782" fill="none" stroke="#4F46E5" stroke-width="1.6" marker-end="url(#arrowIndigo)"/>
+  <path d="M921 184 H939" fill="none" stroke="#4F46E5" stroke-width="1.6" marker-end="url(#arrowIndigo)"/>
+
+  <!-- router -> outcomes -->
+  <path d="M1078 184 H1100 V124 H1120" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrowSlate)"/>
+  <path d="M1078 184 H1100 V186 H1120" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrowSlate)"/>
+  <path d="M1078 184 H1100 V248 H1120" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#arrowSlate)"/>
+
+  <!-- ============ OUTCOMES ============ -->
+  <g>
+    <rect x="1120" y="98" width="240" height="52" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+    <rect x="1120" y="98" width="6" height="52" rx="3" fill="#10B981"/>
+    <circle cx="1150" cy="124" r="13" fill="#ffffff" stroke="#10B981"/>
+    <g color="#059669" transform="translate(1141.5,115.5)"><use href="#i-check" width="17" height="17"/></g>
+    <text x="1172" y="120" class="pilltitle" fill="#065F46">TRUSTED</text>
+    <text x="1172" y="136" class="pillsub">confidence ≥ 0.85</text>
+
+    <rect x="1120" y="160" width="240" height="52" rx="10" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="1120" y="160" width="6" height="52" rx="3" fill="#F59E0B"/>
+    <circle cx="1150" cy="186" r="13" fill="#ffffff" stroke="#F59E0B"/>
+    <g color="#B45309" transform="translate(1141.5,177.5)"><use href="#i-flag" width="17" height="17"/></g>
+    <text x="1172" y="182" class="pilltitle" fill="#92400E">FLAGGED</text>
+    <text x="1172" y="198" class="pillsub">0.50 – 0.84 → explained</text>
+
+    <rect x="1120" y="222" width="240" height="52" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+    <rect x="1120" y="222" width="6" height="52" rx="3" fill="#EF4444"/>
+    <circle cx="1150" cy="248" r="13" fill="#ffffff" stroke="#EF4444"/>
+    <g color="#B91C1C" transform="translate(1141.5,239.5)"><use href="#i-block" width="17" height="17"/></g>
+    <text x="1172" y="244" class="pilltitle" fill="#991B1B">QUARANTINED</text>
+    <text x="1172" y="260" class="pillsub">confidence &lt; 0.50</text>
+  </g>
+
+  <!-- ============ ROW 2: DRIFT + AI EXPLANATION ============ -->
+
+  <!-- router -> drift monitor (dashed, batch outcomes) -->
+  <path d="M1008.5 259 V270 H970 V292" fill="none" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <path d="M970 292 H525.5 V300" fill="none" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <path d="M525.5 300 V344" fill="none" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrowMuted)"/>
+  <text x="700" y="286" text-anchor="middle" class="connlabel">batch validation outcomes</text>
+
+  <!-- drift zone -->
+  <g>
+    <rect x="450" y="300" width="460" height="180" rx="14" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="470" y="318" class="grouplabel" fill="#475569">POPULATION DRIFT MONITORING</text>
+    <text x="470" y="331" class="groupcaption">batch-level signal, not per-record</text>
+
+    <rect x="468" y="344" width="115" height="112" rx="10" fill="#ffffff" stroke="#CBD5E1"/>
+    <circle cx="525.5" cy="374" r="17" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <g color="#475569" transform="translate(514.5,363)"><use href="#i-hist" width="22" height="22"/></g>
+    <text x="525.5" y="401" text-anchor="middle" class="cardtitle" font-size="12">Population</text>
+    <text x="525.5" y="414" text-anchor="middle" class="cardtitle" font-size="12">Monitor</text>
+    <text x="525.5" y="429" text-anchor="middle" class="cardsub" font-size="9">vs stored baseline</text>
+
+    <path d="M583 400 H598" fill="none" stroke="#64748B" stroke-width="1.4" marker-end="url(#arrowMuted)"/>
+
+    <rect x="598" y="344" width="80" height="48" rx="8" fill="#ffffff" stroke="#E2E8F0"/>
+    <text x="638" y="364" text-anchor="middle" class="chipname">Z-score</text>
+    <text x="638" y="378" text-anchor="middle" class="chipsub">numeric fields</text>
+
+    <rect x="688" y="344" width="80" height="48" rx="8" fill="#ffffff" stroke="#E2E8F0"/>
+    <text x="728" y="364" text-anchor="middle" class="chipname">PSI</text>
+    <text x="728" y="378" text-anchor="middle" class="chipsub">categorical</text>
+
+    <rect x="598" y="402" width="80" height="48" rx="8" fill="#ffffff" stroke="#E2E8F0"/>
+    <text x="638" y="422" text-anchor="middle" class="chipname">Null Δ</text>
+    <text x="638" y="436" text-anchor="middle" class="chipsub">missing rate</text>
+
+    <rect x="688" y="402" width="80" height="48" rx="8" fill="#ffffff" stroke="#E2E8F0"/>
+    <text x="728" y="422" text-anchor="middle" class="chipname">Violation Δ</text>
+    <text x="728" y="436" text-anchor="middle" class="chipsub">rule-fail rate</text>
+
+    <path d="M768 400 H793" fill="none" stroke="#64748B" stroke-width="1.4" marker-end="url(#arrowMuted)"/>
+
+    <rect x="793" y="344" width="100" height="112" rx="10" fill="#ffffff" stroke="#CBD5E1"/>
+    <circle cx="843" cy="374" r="17" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <g color="#B91C1C" transform="translate(832,363)"><use href="#i-alert" width="22" height="22"/></g>
+    <text x="843" y="407" text-anchor="middle" class="cardtitle" font-size="12">Drift Alert</text>
+    <text x="843" y="422" text-anchor="middle" class="cardsub" font-size="9">vs stable batch</text>
+  </g>
+
+  <!-- flagged -> AI explanation (routed around the outcomes column via the right margin) -->
+  <path d="M1360 186 H1380 V296 H1240 V300" fill="none" stroke="#8B5CF6" stroke-width="1.6" marker-end="url(#arrowPurple)"/>
+  <text x="1376" y="240" text-anchor="end" class="connlabel">flagged</text>
+
+  <!-- AI explanation zone -->
+  <g>
+    <rect x="1120" y="300" width="240" height="180" rx="14" fill="#FAF5FF" stroke="#C4B5FD" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="1136" y="318" class="grouplabel" fill="#6D28D9">AI-ASSISTED EXPLANATION</text>
+    <text x="1136" y="331" class="groupcaption">runs only after a decision exists</text>
+
+    <g color="#6D28D9" transform="translate(1136,347)"><use href="#i-search" width="16" height="16"/></g>
+    <text x="1160" y="360" class="listtext">Query / embedding</text>
+
+    <path d="M1144 370 V378" stroke="#C4B5FD" stroke-width="1.3" marker-end="url(#arrowPurple)"/>
+
+    <g color="#6D28D9" transform="translate(1136,381)"><use href="#i-vector" width="16" height="16"/></g>
+    <text x="1160" y="394" class="listtext">FAISS retrieval (top-k)</text>
+
+    <path d="M1144 404 V412" stroke="#C4B5FD" stroke-width="1.3" marker-end="url(#arrowPurple)"/>
+
+    <g color="#6D28D9" transform="translate(1136,415)"><use href="#i-book" width="16" height="16"/></g>
+    <text x="1160" y="428" class="listtext">Knowledge base (14 docs)</text>
+
+    <path d="M1144 438 V446" stroke="#C4B5FD" stroke-width="1.3" marker-end="url(#arrowPurple)"/>
+
+    <g color="#6D28D9" transform="translate(1136,449)"><use href="#i-asterisk" width="16" height="16"/></g>
+    <text x="1160" y="462" class="liststrong">Claude → grounded explanation</text>
+  </g>
+
+  <!-- ============ PLATFORM STRIP ============ -->
+  <path d="M330 270 V490" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3"/>
+  <path d="M330 490 H260 V500" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrowMuted)"/>
+
+  <path d="M1008.5 259 V270 H970 V490" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3"/>
+  <path d="M970 490 H700 V500" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrowMuted)"/>
+  <path d="M970 490 H1140 V500" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrowMuted)"/>
+
+  <g>
+    <rect x="40" y="500" width="1320" height="64" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="56" y="494" class="platformlabel">PLATFORM</text>
+
+    <g color="#475569" transform="translate(190,516)"><use href="#i-key" width="24" height="24"/></g>
+    <text x="224" y="528" class="platformtitle">Auth &amp; Quotas</text>
+    <text x="224" y="544" class="platformsub">bearer token · per-user rate limit</text>
+
+    <g color="#475569" transform="translate(630,516)"><use href="#i-db" width="24" height="24"/></g>
+    <text x="664" y="528" class="platformtitle">Audit Trail</text>
+    <text x="664" y="544" class="platformsub">JSONL entry per validated record</text>
+
+    <g color="#475569" transform="translate(1070,516)"><use href="#i-db" width="24" height="24"/></g>
+    <text x="1104" y="528" class="platformtitle">Job Store</text>
+    <text x="1104" y="544" class="platformsub">async results, in-memory, retry-tracked</text>
+  </g>
+</svg>
